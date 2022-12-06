@@ -1,0 +1,6 @@
+usermame:password:5:2:1
+ygi:ygu:2:1:0
+asdasd:qwerty:2:1:0
+testing:asd:1:1:1
+pop:asd:4:4:4
+usedrlkksnuuuame:aksd:0:0:0

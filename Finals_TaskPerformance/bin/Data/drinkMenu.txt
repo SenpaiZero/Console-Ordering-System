@@ -1,0 +1,5 @@
+Drink1:10
+Drink2:25
+Drink3:50
+Drink4:40
+Drink5:15

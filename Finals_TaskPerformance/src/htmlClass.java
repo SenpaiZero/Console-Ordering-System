@@ -7,7 +7,8 @@ import java.io.IOException;
 public class htmlClass {
 	public static String htmlPath = ".\\src\\html\\Reciept.html";
 	
-	public static void setReciept(String[] cart, int[] quantity, double discount) throws IOException {
+	public static void setReciept(String[] cart, int[] quantity, double discount) throws IOException
+	{
 		StringBuilder html = new StringBuilder();
 		double total = 0;
 		
@@ -131,14 +132,18 @@ public class htmlClass {
 				+ "								<td class=\"Hours\"><h2>Qty</h2></td>\r\n"
 				+ "								<td class=\"Rate\"><h2>Sub Total</h2></td>\r\n");
 				
-		//add new item on html for every new item that costumers added
-				for (int i = 0; i < cart.length; i++) {
-					html.append("							<tr class=\"service\">\n"
-							+"								<td class=\"tableitem\"><p class=\"itemtext\">"+ cart[i] +"</p></td>\n"
-							+"								<td class=\"tableitem\"><p class=\"itemtext\">"+ quantity[i] +"</p></td>\n"
-							+"								<td class=\"tableitem\"><p class=\"itemtext\">"+ (getPrice(cart[i]) * quantity[i]) +"</p></td>\r\n\n"
-							+"							</tr>\n");
-					total += (getPrice(cart[i]) * quantity[i]);
+			//add new item on html for every new item that costumers added
+				for (int i = 0; i < cart.length; i++)
+				{
+					if(cart[i].equalsIgnoreCase(Shop.food.get(i)) || cart[i].equalsIgnoreCase(Shop.drink.get(i)))
+					{
+						html.append("							<tr class=\"service\">\n"
+								+"								<td class=\"tableitem\"><p class=\"itemtext\">"+ cart[i] +"</p></td>\n"
+								+"								<td class=\"tableitem\"><p class=\"itemtext\">"+ quantity[i] +"</p></td>\n"
+								+"								<td class=\"tableitem\"><p class=\"itemtext\">"+ (getPrice(cart[i]) * quantity[i]) +"</p></td>\r\n\n"
+								+"							</tr>\n");
+						total += (getPrice(cart[i]) * quantity[i]);
+					}
 				}
 				html.append("\r\n"
 				+ "							<tr class=\"tabletitle\">\r\n"
@@ -183,15 +188,20 @@ public class htmlClass {
 	}
 	
 	//Getting the price of the item by looking at the cart
-	public static int getPrice(String cart) {
-		for (int i = 0; i < Shop.food.size(); i++) {
+	public static int getPrice(String cart) 
+	{
+		//Getting the value of food price
+		for (int i = 0; i < Shop.food.size(); i++) 
+		{
 			if(cart.equalsIgnoreCase(Shop.food.get(i))) 
 			{
 				return Integer.valueOf(Shop.foodPrice.get(i));
 			}
 		}
 		
-		for (int i = 0; i < Shop.drink.size(); i++) {
+		//Getting the value of drinks price
+		for (int i = 0; i < Shop.drink.size(); i++) 
+		{
 			if(cart.equalsIgnoreCase(Shop.drink.get(i))) 
 			{
 				return Integer.valueOf(Shop.drinkPrice.get(i));

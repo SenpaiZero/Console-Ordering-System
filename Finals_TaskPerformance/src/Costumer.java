@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Costumer extends costumerData
 {
-	public static String path = "C:\\Users\\Xeb\\Desktop\\Finals_TaskPerformance\\src\\Data\\costumerData.txt";
-	public static String path_temp = "C:\\Users\\Xeb\\Desktop\\Finals_TaskPerformance\\src\\Data\\tempCostumerData.txt";
+	public static String path = ".\\src\\Data\\costumerData.txt";
+	public static String path_temp = ".\\src\\Data\\tempCostumerData.txt";
 	
 	Costumer() 
 	{
@@ -153,45 +153,56 @@ class costumerData {
 	{
 		return userName;
 	}
+	
 	public void setUserName(String userName)
 	{
 		this.userName = userName;
 	}
+	
 	public String getPassword() 
 	{
 		return password;
 	}
+	
 	public void setPassword(String password) 
 	{
 		this.password = password;
 	}
+	
 	public String getContactNumber() {
 		return contactNumber;
 	}
+	
 	public void setContactNumber(String contactNumber) 
 	{
 		this.contactNumber = contactNumber;
 	}
+	
 	public int getVoucher10() 
 	{
 		return voucher10;
 	}
+	
 	public void setVoucher10(int voucher10) 
 	{
 		this.voucher10 = voucher10;
 	}
+	
 	public int getVoucher25() 
 	{
 		return voucher25;
 	}
+	
 	public void setVoucher25(int voucher25) 
 	{
 		this.voucher25 = voucher25;
 	}
+	
 	public int getVoucher50() 
 	{
 		return voucher50;
 	}
+	
 	public void setVoucher50(int voucher50) 
 	{
 		this.voucher50 = voucher50;

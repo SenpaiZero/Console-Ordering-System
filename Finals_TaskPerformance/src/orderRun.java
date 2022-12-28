@@ -1,17 +1,23 @@
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Scanner;
 
 public class orderRun {
-	public static void main(String[] args) throws IOException, URISyntaxException {
+	static Scanner scan = new Scanner(System.in);
+	
+	public static void main(String[] args) throws IOException, URISyntaxException 
+	{
 		Costumer costumer = new Costumer();
 		Shop shop = new Shop();
 		
-		if(costumer.isLogin("user", "pass")) {
+		if(costumer.isLogin("user", "pass")) 
+		{
 			System.out.println("asd");
 		}
 		
-		if(costumer.isRegister("usedrlkksnuuuame", "aksd", "aksd")) {
+		if(costumer.isRegister("usedrlkksnuuuame", "aksd", "aksd")) 
+		{
 			System.out.println("fhg");
 		}
 		
@@ -30,5 +36,20 @@ public class orderRun {
 		
 		//bali example is food1 food3 food7
 		htmlClass.setReciept(food, quantity, 5);
+	}
+	
+	public static void choices() 
+	{
+		String userChoice;
+		userChoice = scan.nextLine();
+		
+		switch (userChoice.toLowerCase()) {
+		case "admin":
+			break;
+		case "costumer":
+			break;
+		default:
+			break;
+		}
 	}
 }

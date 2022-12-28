@@ -1,7 +1,5 @@
-import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -31,16 +29,20 @@ public class Shop extends shopData
 		//Checking the array if it has the same string
 		//as the user input
 		//add money to totalProfit pag may katulad
-		for (int i = 0; i < foodArr.length; i++) {
-			if(cart.equalsIgnoreCase(foodArr[i])) {
+		for (int i = 0; i < foodArr.length; i++) 
+		{
+			if(cart.equalsIgnoreCase(foodArr[i])) 
+			{
 				setTotalProfit(
 						getTotalProfit() + (Double.valueOf(foodPriceArr[i]) * quantity));
 			}
 		}
 		
 		//same sa food
-		for (int i = 0; i < drinkArr.length; i++) {
-			if(cart.equalsIgnoreCase(drinkArr[i])) {
+		for (int i = 0; i < drinkArr.length; i++) 
+		{
+			if(cart.equalsIgnoreCase(drinkArr[i])) 
+			{
 				setTotalProfit(
 						getTotalProfit() + (Double.valueOf(drinkPriceArr[i]) * quantity));
 			}
@@ -53,10 +55,12 @@ public class Shop extends shopData
 		System.out.println(printLine);
 		System.out.printf("%s %20s %10s %15s", "|", "FOOD", "PRICE", "|");
 		System.out.println("\n" + printLine);
+		
 		for (int i = 0; i < foods.length; i++) 
 		{
 			System.out.printf("%s %20s %10s %15s %n", "|", foods[i], foodPrice[i], "|");
 		}
+		
 		System.out.println(printLine + "\n\n");
 
 		System.out.println(printLine);
@@ -67,6 +71,7 @@ public class Shop extends shopData
 		{
 			System.out.printf("%s %20s %10s %15s %n", "|", drinks[i], drinkPrice[i], "|");
 		}
+		
 		System.out.println(printLine);
 	}
 	
@@ -113,18 +118,22 @@ public class Shop extends shopData
 	}
 }
 
-class shopData {
+class shopData
+{
 	private double totalProfit;
 	
-	public shopData() {
+	public shopData() 
+	{
 		totalProfit = 0;
 	}
 	
-	public void setTotalProfit(double totalProfit) {
+	public void setTotalProfit(double totalProfit)
+	{
 		this.totalProfit = totalProfit;
 	}
 	
-	public double getTotalProfit() {
+	public double getTotalProfit() 
+	{
 		return totalProfit;
 	}
 }

@@ -1,5 +1,6 @@
-Drink1:10
-Drink2:25
-Drink3:50
-Drink4:40
-Drink5:15
+Drink1:10:Available
+Drink2:25:Available
+Drink3:50:Available
+Drink4:40:Available
+Drink5:15:Available
+drink one:21:Available

@@ -10,19 +10,19 @@ public class BorderBox {
 	public static void printLine(String print)
 	{
 		lineStart();
-		System.out.print(StringUtils.center(print, 130));
+		System.out.print(StringUtils.center(print, 135));
 		lineLast();
 	}
 	
 	//Function for printing centered scanner (most of the time)
 	public static void printInput()
 	{
-		System.out.print(StringUtils.center("", 72));
+		System.out.print(StringUtils.center("", 80));
 	}
 	//Printing lines para sa gilid
 	static void lineStart()
 	{
-		System.out.print("           ║");
+		System.out.print("                ║");
 	}
 	
 	//Printing lines para sa gilid sa dulo 
@@ -35,8 +35,8 @@ public class BorderBox {
 	//Printing lines for up
 	public static void lineUp()
 	{
-		System.out.print("           ╔");
-		for (int i = 0; i < 130; i++) 
+		System.out.print("                ╔");
+		for (int i = 0; i < 135; i++) 
 		{
 			System.out.print("═");
 		}
@@ -47,8 +47,8 @@ public class BorderBox {
 	//May corner din kaya hiwalay
 	public static void lineDown()
 	{
-		System.out.print("           ╚");
-		for (int i = 0; i < 130; i++) 
+		System.out.print("                ╚");
+		for (int i = 0; i < 135; i++) 
 		{
 			System.out.print("═");
 		}

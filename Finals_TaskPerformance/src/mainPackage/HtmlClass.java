@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
+import UserInterfaceClasses.Shop;
+
 
 public class HtmlClass {
 	public static String htmlPath = ".\\src\\html\\Reciept.html";
@@ -15,7 +17,7 @@ public class HtmlClass {
 	static StringBuilder html = new StringBuilder();
 	static double total;
 	
-	public void setReciept(String[] cart, String[] quantity, double discount) throws IOException
+	public void setReciept(String[] cart, String[] quantity, double discount, boolean isOpen) throws IOException
 	{
 		html.delete(0, html.length());
 		total = 0;
@@ -182,16 +184,18 @@ public class HtmlClass {
 				
 				//total in console
 				costumerData cData = new costumerData();
-				cData.setTotal(String.valueOf(total -((discount / 100) * total)));
-				
+				cData.setTotal(Integer.valueOf((int) (total -((discount / 100) * total))));
 				//Writing and saving the string builder into html
 				FileWriter writer = new FileWriter(htmlPath);
 				writer.write(html.toString());
 				writer.flush();
 				
 				//Opening the html file in browser
+				if(isOpen == true)
+				{
 				File htmlFile = new File(htmlPath);
 				Desktop.getDesktop().open(htmlFile);
+				}
 		
 	}
 	
@@ -247,10 +251,5 @@ public class HtmlClass {
 			}
 		}
 		return 0;
-	}
-	
-	public double getTotal()
-	{
-		return total;
 	}
 }

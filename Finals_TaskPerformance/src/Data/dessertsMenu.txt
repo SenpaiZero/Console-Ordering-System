@@ -1,7 +1,7 @@
-dessert1:55:Available
-dessert2:405:Available
-dessert3:100:Available
-dessert4:85:Available
-chocolate cake:320:Available
-Milktea:85:Available
-halo halo:50:Available
+Vanilla Ice Cream:55:Available
+Glazed Dounut:100:Available
+Chocolate Cake:150:Available
+Mango Cream:85:Available
+Ube Cheesecake:120:Available
+Apple Pie:85:Available
+Halo-Halo:50:not available

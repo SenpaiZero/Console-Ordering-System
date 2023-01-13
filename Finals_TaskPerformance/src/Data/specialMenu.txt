@@ -1,7 +1,7 @@
-spFood10:55:Available
-spFood11:405:Available
-spFood12:100:Available
-spFood13:85:Available
-spFood14:102:Available
-spFood15:1005:Available
-Special Cake:15000:Available
+Savory Bread:55:Available
+Tereyaki Meatballs:80:Available
+Grilled Tomato Pizza:80:Available
+Sausage Been Dip:85:Available
+Cheese Ring:60:Available
+Cheese Fries:60:Available
+HUmmus Nachos:100:Available

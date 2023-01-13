@@ -1,8 +1,6 @@
-Drink1:10:Available
-Drink2:25:Available
-Drink3:50:Available
-Drink4:40:Available
-Drink5:15:Available
-drink one:21:Available
-chaa tea:25:Available
-red horse:60:Available
+Blue Lemonade:30:Available
+Mango Juice:30:Available
+Fresh Brewed Coffee:50:Available
+Beer:85:Available
+Wine:150:Available
+Cocktail:120:Available

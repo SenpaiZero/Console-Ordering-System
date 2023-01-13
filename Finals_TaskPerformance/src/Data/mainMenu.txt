@@ -1,12 +1,10 @@
-Food1:50:Available
-Food2food:25:Available
-Food3aoishdo:100:Available
-Food4:15:Available
-Food5:152:Available
-Food6:89:Available
-Food7:100:Available
-Food8:105:Available
-Food9:75:Available
-Testing One:123:Available
-main 1:12:Available
-mang chaa:69:Available
+Butter Chicken:150:Available
+Grilled Chicken:150:Available
+Spicy Pork Vindaloo:180:Available
+Sweet & Sour Salmon:200:Available
+Chili Garlic Beef:170:Available
+Sticky Tamarind Chicken:120:Available
+Pepper Butter Pork :160:Available
+Roasted Spicy Shrimp:180:Available
+Sweet Fry Lamb:250:Available
+Steam butter Lobster:280:Available

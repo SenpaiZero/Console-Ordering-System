@@ -1,4 +1,4 @@
-package mainPackage;
+package UserInterfaceClasses;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -36,48 +36,48 @@ public class Shop
 			String[] special, String[] specialPrice, String[] specialAvail,
 			String[] desserts, String[] dessertsPrice, String[] dessertAvail) 
 	{
-		String printLine = "     ╔════════════════════════════════════════════════════════════════════╗";
-		String printLine2 = "     ╚════════════════════════════════════════════════════════════════════╝";
-		System.out.printf("%s %78s %n",printLine, printLine);
+		String printLine = "     ╔══════════════════════════════════════════════════════════════════════════════╗";
+		String printLine2 = "     ╚══════════════════════════════════════════════════════════════════════════════╝";
+		System.out.printf("%s %88s %n",printLine, printLine);
 		printTitle("MAIN DISHES", true);
 		printTitle("DRINKS", false);
-		System.out.printf("%s %78s %n",printLine2, printLine2);
+		System.out.printf("%s %88s %n",printLine2, printLine2);
 		int max1 = Math.max(main.length, drinks.length);
 		
 		for (int i = 0; i < max1; i++) 
 		{
-			System.out.printf("     %s %20s %10s %20s %15s", "║", main[i], mainPrice[i], mainAvail[i], "║");
+			System.out.printf("     %s %30s %10s %20s %15s", "║", main[i], mainPrice[i], mainAvail[i], "║");
 			
 			if(drinks.length > i)
 			{
-				System.out.printf("     %5s %20s %10s %20s %15s %n", "║", drinks[i], drinkPrice[i], drinkAvail[i], "║");
+				System.out.printf("     %5s %30s %10s %20s %15s %n", "║", drinks[i], drinkPrice[i], drinkAvail[i], "║");
 			}
 			else if(drinks.length <= i)
 			{
-				System.out.printf("     %5s %20s %10s %20s %15s %n", "║", "", "", "", "║");
+				System.out.printf("     %5s %30s %10s %20s %15s %n", "║", "", "", "", "║");
 			}
 		}
-		System.out.printf("%s %78s %n",printLine, printLine);
+		System.out.printf("%s %88s %n",printLine, printLine);
 		printTitle("SPECIAL MENU", true);
 		printTitle("DESSERTS", false);
-		System.out.printf("%s %78s %n",printLine2, printLine2);
+		System.out.printf("%s %88s %n",printLine2, printLine2);
 		
 		int max2 = Math.max(special.length, desserts.length);
 		for (int i = 0; i < max2; i++) 
 		{
-			System.out.printf("     %s %20s %10s %20s %15s", "║", special[i], specialPrice[i], specialAvail[i], "║");
+			System.out.printf("     %s %30s %10s %20s %15s", "║", special[i], specialPrice[i], specialAvail[i], "║");
 			
 			if(desserts.length > i)
 			{
-				System.out.printf("     %5s %20s %10s %20s %15s %n", "║", desserts[i], dessertsPrice[i], dessertAvail[i], "║");
+				System.out.printf("     %5s %30s %10s %20s %15s %n", "║", desserts[i], dessertsPrice[i], dessertAvail[i], "║");
 			}
 			else if(desserts.length <= i)
 			{
-				System.out.printf("     %5s %20s %10s %20s %15s %n", "║", "", "", "", "║");
+				System.out.printf("     %5s %30s %10s %20s %15s %n", "║", "", "", "", "║");
 			}
 		}
 
-		System.out.printf("%5s %78s %n",printLine2, printLine2);
+		System.out.printf("%5s %88s %n",printLine2, printLine2);
 	}
 	
 	public void printMenu() throws FileNotFoundException 
@@ -162,11 +162,11 @@ public class Shop
 	{
 		if(isFront)
 		{
-			System.out.printf("     %s %20s %10s %20s %15s", "║", title, "PRICE", "AVAILABILITY", "║");
+			System.out.printf("     %s %30s %10s %20s %15s", "║", title, "PRICE", "AVAILABILITY", "║");
 		}
 		else
 		{
-			System.out.printf("     %5s %20s %10s %20s %15s%n", "║", title, "PRICE", "AVAILABILITY", "║");
+			System.out.printf("     %5s %30s %10s %20s %15s%n", "║", title, "PRICE", "AVAILABILITY", "║");
 		}
 	}
 }

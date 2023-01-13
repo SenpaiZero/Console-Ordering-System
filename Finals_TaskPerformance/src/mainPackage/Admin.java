@@ -1,30 +1,51 @@
 package mainPackage;
 import MenuClasses.*;
+import UserInterfaceClasses.AdminUI;
 import UserInterfaceClasses.BorderBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public class Admin 
+public class Admin extends AdminUI
 {	
-	private String username;
-	private String password;
+	ArrayList<String> username = new ArrayList<>();
+	ArrayList<String> password = new ArrayList<>();
 	private static boolean isPrint = false;
 	
 	public Admin() {
-		username = "admin";
-		password = "admin";
+		username.add("admin");
+		password.add("admin");
+		
+		username.add("ygi");
+		password.add("santos");
+		
+		username.add("dean");
+		password.add("boringot");
+		
+		username.add("kyla");
+		password.add("arquio");
+		
+		username.add("mark");
+		password.add("agustin");
 	}
 	
 	public boolean isAdmin(String username, String password)
 	{
-		if(this.username.equals(username) && this.password.equals(password))
+		String user, pass;
+		for (int i = 0; i < this.username.size(); i++) 
 		{
-			printOnce("you've successfully authenticated");
-			return true;
+			user = this.username.get(i);
+			pass = this.password.get(i);
+			if(username.equals(user) && password.equals(pass))
+			{
+				printOnce("you've successfully authenticated");
+				return true;
+			}
 		}
-		else if(username.equalsIgnoreCase("exit")
+
+		if(username.equalsIgnoreCase("exit")
 				|| password.equalsIgnoreCase("exit"))
 		{
 			BorderBox.lineUp();
@@ -62,8 +83,12 @@ public class Admin
 				remove.removeExistingMenu(scanner);
 				break;
 			case "change price": 
-				changePrice replace = new changePrice();
+				ChangePrice replace = new ChangePrice();
 				replace.changePriceMenu(scanner);
+				break;
+			case "change avail":
+				ChangeAvail avail = new ChangeAvail();
+				avail.changeAvailability(scanner);
 				break;
 		}
 		

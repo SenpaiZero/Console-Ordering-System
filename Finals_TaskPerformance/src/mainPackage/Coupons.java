@@ -6,12 +6,17 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import UserInterfaceClasses.BorderBox;
+import UserInterfaceClasses.CouponUI;
 
-public class Coupons {
+
+public class Coupons extends CouponUI
+{
 	static String path = ".\\src\\Data\\couponData.txt";
 	private String[] coupon;
 	private double discount;
 	
+	//Constructor for adding all coupons in string array
 	public Coupons() throws FileNotFoundException {
 		File file = new File(path);
 		Scanner sc = new Scanner(file);
@@ -23,16 +28,6 @@ public class Coupons {
 		}
 		
 		setCoupons(tempCoupon.toArray(new String[tempCoupon.size()]));
-	}
-	
-	void setCoupons(String[] coupon)
-	{
-		this.coupon = coupon;
-	}
-	
-	public String[] getCoupon()
-	{
-		return coupon;
 	}
 	
 	public void removeCoupon(String coupon, boolean isUse) throws IOException
@@ -63,11 +58,13 @@ public class Coupons {
 		{
 			if(isExist == true)
 			{
-				System.out.println("You've successfully removed the coupon: " + coupon);
+				BorderBox.lineUp();
+				BorderBox.printLine("You've successfully removed the coupon: " + coupon);
+				BorderBox.lineDown();
 			}
 			else
 			{
-				System.out.println("The coupon you entered does not exist");
+				BorderBox.printLine("The coupon you entered does not exist");
 			}
 		}
 		FileWriter writer = new FileWriter(path);
@@ -95,25 +92,17 @@ public class Coupons {
 		
 		if(isWrite == true)
 		{
-			System.out.println("You've successfully added a coupon! ");
+			BorderBox.lineUp();
+			BorderBox.printLine("You've successfully added a coupon! ");
+			BorderBox.lineDown();
 			FileWriter writer = new FileWriter(path, true);
 			writer.write("\n"+coupon + ":" + discount);
 			writer.flush();
 		}
 		else
 		{
-			System.out.println("The coupon already exist");
+			BorderBox.printLine("The coupon already exist");
 		}
-	}
-	
-	void setDiscount(double discount)
-	{
-		this.discount = discount;
-	}
-	
-	public double getDiscount()
-	{
-		return discount;
 	}
 	
 	public boolean useCoupon(String coupon) throws IOException
@@ -133,4 +122,27 @@ public class Coupons {
 		}
 		return false;
 	}
+
+
+	void setDiscount(double discount)
+	{
+		this.discount = discount;
+	}
+	
+	public double getDiscount()
+	{
+		return discount;
+	}
+	
+	void setCoupons(String[] coupon)
+	{
+		this.coupon = coupon;
+	}
+	
+	public String[] getCoupon()
+	{
+		return coupon;
+	}
+	
 }
+

@@ -3,15 +3,15 @@ package mainPackage;
 public class costumerData {
 	//User personal information
 	private static String userName, password, contactNumber, birthDay; 
-	private static String total;
+	private static int total;
 	
 	
-	public String getTotal()
+	public int getTotal()
 	{
-		return total;
+		return Integer.valueOf(total);
 	}
 
-	public static void setTotal(String totals)
+	public static void setTotal(int totals)
 	{
 		total = totals;
 	}

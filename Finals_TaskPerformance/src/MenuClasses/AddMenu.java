@@ -19,61 +19,58 @@ public class AddMenu {
 	{
 		String choice;
 		String dish, price;
-		BorderBox.lineUp();
-		BorderBox.printLine("[1] MAIN DISH  [2] DRINKS  [3] DESSERT  [4] SPECIAL MENU  [5] GO BACK");
-		BorderBox.lineDown();
 		do 
 		{
 			BorderBox.lineUp();
+			BorderBox.printLine("[MAIN DISH]  :  [DRINKS]  :  [DESSERT]  :  [SPECIAL MENU]  :  [GO BACK]");
 			BorderBox.printLine("Enter: ");
 			BorderBox.printInput();
 			choice = scan.nextLine();
 			BorderBox.lineDown();
 			
-			//Checks if the user input is 1 to 4 numbers and only 1 character
-			if(Pattern.matches("[1-5]{1}", choice))
+			//Checks the user input
+			if(choice.matches("main dish|drinks|dessert|special menu|go back"))
 			{
 				break;
 			}
 			
 			BorderBox.printLine("Please enter the correct option");
 		} while (true);
-		if(!choice.equals("5"))
-		{
-			BorderBox.lineUp();
-			BorderBox.printLine("Enter what dish and price you want to add");
-			BorderBox.printLine("Dish: ");
+		
+		BorderBox.lineUp();
+		BorderBox.printLine("Enter what dish and price you want to add");
+		BorderBox.printLine("Dish: ");
+		BorderBox.printInput();
+		dish = scan.nextLine();
+		BorderBox.lineDown();
+		do {
+			BorderBox.printLine("Price: ");
 			BorderBox.printInput();
-			dish = scan.nextLine();
-			BorderBox.lineDown();
-			do {
-				BorderBox.printLine("Price: ");
-				BorderBox.printInput();
-				price = scan.nextLine();
-				
-				if(Pattern.matches("\\d+", price)) 
-				{
-					break;
-				}
-				BorderBox.printLine("Please enter integers only");
-			} while(true);
+			price = scan.nextLine();
 			
-			switch (Integer.valueOf(choice)) 
+			if(Pattern.matches("\\d+", price)) 
 			{
-			case 1:
-				mainDish(dish, price);
-				break;
-			case 2:
-				drinks(dish, price);
-				break;
-			case 3:
-				desserts(dish, price);
-				break;
-			case 4:
-				specialMenu(dish, price);
 				break;
 			}
+			BorderBox.printLine("Please enter integers only");
+		} while(true);
+		
+		switch (Integer.valueOf(choice)) 
+		{
+		case 1:
+			mainDish(dish, price);
+			break;
+		case 2:
+			drinks(dish, price);
+			break;
+		case 3:
+			desserts(dish, price);
+			break;
+		case 4:
+			specialMenu(dish, price);
+			break;
 		}
+	
 	}
 	
 	void mainDish(String dish, String price) throws IOException

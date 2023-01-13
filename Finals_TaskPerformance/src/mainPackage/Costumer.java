@@ -6,8 +6,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import UserInterfaceClasses.BorderBox;
+import UserInterfaceClasses.CostumerUI;
 
-public class Costumer
+public class Costumer extends CostumerUI
 {
 	public static String path = ".\\src\\Data\\costumerData.txt";
 	public static String path_temp = ".\\src\\Data\\tempCostumerData.txt";

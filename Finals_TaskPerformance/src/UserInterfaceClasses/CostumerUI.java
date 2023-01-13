@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 public class CostumerUI 
 {
@@ -41,8 +42,21 @@ public class CostumerUI
 			if(shopClass.main.contains(choiceDish) || shopClass.drink.contains(choiceDish)
 					|| shopClass.special.contains(choiceDish) || shopClass.dessert.contains(choiceDish))
 			{
-				System.out.print("Quantity: ");
-				choiceQuantity = scan.nextLine();
+				
+				do
+				{
+					BorderBox.printLine("Quantity: ");
+					BorderBox.printInput();
+					choiceQuantity = scan.nextLine();
+					BorderBox.lineDown();
+					
+					if(Pattern.matches("\\d+", choiceQuantity))
+					{
+						break;
+					}
+					
+					BorderBox.printLine("Please enter number only");
+				} while(true);
 				
 				cart.addCart(choiceDish, choiceQuantity);
 				
@@ -52,16 +66,43 @@ public class CostumerUI
 				}
 				else
 				{
+					boolean isAllowed = false;
 					//to fix
 					//to fix
 					//to fix
 					//after coupon add pay, cancel, edit cart
-					BorderBox.lineUp();
-					BorderBox.printLine("Enter a coupon   :   Enter exit to skip");
-					BorderBox.printLine("Enter: ");
-					BorderBox.printInput();
-					user = scan.nextLine();
-					BorderBox.lineDown();
+					do
+					{
+						BorderBox.lineUp();
+						BorderBox.printLine("Enter a coupon   :   Enter exit to skip");
+						BorderBox.printLine("Enter: ");
+						BorderBox.printInput();
+						user = scan.nextLine();
+						BorderBox.lineDown();
+						
+						for (int i = 0; i < coupon.getCoupon().length; i++) 
+						{
+							if(user.equalsIgnoreCase("exit"))
+							{
+								isAllowed = true;
+							}
+							
+							if(user.equals(coupon.getCoupon()[i]))
+							{
+								BorderBox.printLine("You've successfully used a coupon!");
+								isAllowed = true;
+							}
+						}
+						
+						if(isAllowed == false)
+						{
+							BorderBox.printLine("The coupon does not exist");
+						}
+						else
+						{
+							break;
+						}
+					} while(true);
 					
 					if(coupon.useCoupon("exit"))
 					{
@@ -74,19 +115,19 @@ public class CostumerUI
 						BorderBox.lineUp();
 						BorderBox.printLine("Please choose");
 						BorderBox.printLine("[PAY]  :  [CANCEL]  :  [EDIT]");
-						System.out.println("Enter: ");
+						BorderBox.printLine("Enter: ");
 						BorderBox.printInput();
 						user = scan.nextLine();
 						BorderBox.lineDown();
-						switch (user)
+						switch (user.toLowerCase())
 						{
-						case "1":
-							payment pay = new payment();
+						case "pay":
+							Payment pay = new Payment();
 							break;
-						case "2":
+						case "cancel":
 							cart.clearCart();
 							break;
-						case "3":
+						case "edit":
 							cart.editCart();
 							break;
 						}
@@ -129,10 +170,11 @@ public class CostumerUI
 		} while(true);
 	}
 	
-	void wallet() throws IOException
+	void wallets() throws IOException
 	{
+		Wallet wallet = new Wallet();
 		String user;
-		checkWallet();
+		
 		System.out.println("Please enter:  [1] CASH IN   [2] CASH OUT  [3] GO BACK");
 		System.out.print("Enter: ");
 		user = scan.nextLine();
@@ -149,13 +191,16 @@ public class CostumerUI
 	void logout()
 	{
 		try 
-		{	BorderBox.printInput();
-			System.out.print("\n\t\t\t\t\t\t\t\t   Logging off.");
+		{
+			BorderBox.lineUp();
+			BorderBox.printInput();
+			System.out.print("\n\t\t\t\t\t\t\t\t\t      Logging off.");
 			TimeUnit.SECONDS.sleep(1);
 			System.out.print(".");
 			TimeUnit.SECONDS.sleep(1);
 			System.out.print(".");
-			System.out.println("\n\t\t\t\t\t\t\t You've successfully logged out");
+			System.out.println("\n\t\t\t\t\t\t\t\t     You've successfully logged out");
+			BorderBox.lineDown();
 		} catch (InterruptedException e) 
 		{
 			e.printStackTrace();
@@ -169,54 +214,117 @@ public class CostumerUI
 		String choices;
 		do
 		{
-			BorderBox.printLine("Enter: ");
-			BorderBox.printInput();
-			choices = scan.nextLine();
-			BorderBox.lineDown();
-			if(choices.toLowerCase().matches("shop|wallet|logout"))
+			do
 			{
+				BorderBox.lineUp();
+				BorderBox.printLine("Please choose");
+				BorderBox.printLine("[SHOP]  :  [WALLET]  :  [LOGOUT]");
+				BorderBox.printLine("Enter: ");
+				BorderBox.printInput();
+				choices = scan.nextLine();
+				BorderBox.lineDown();
+				if(choices.toLowerCase().matches("shop|wallet|logout"))
+				{
+					break;
+				}
+			} while(true);
+			
+			switch (choices.toLowerCase()) {
+			case "shop":
+				shop();
+				break;
+			case "wallet":
+				Wallet wallet = new Wallet();
+				wallet.showMenu();
+				break;
+			case "logout":
+				logout();
 				break;
 			}
-		} while(true);
-		
-		switch (choices.toLowerCase()) {
-		case "shop":
-			shop();
-			break;
-		case "wallet":
-			wallet();
-			break;
-		case "logout":
-			logout();
-			break;
-		}
+		} while(!choices.equalsIgnoreCase("logout"));
 	}
-
-	public void checkWallet() throws IOException
+	
+	public void showMenu() throws IOException
 	{
 		Costumer costumer = new Costumer();
 		costumerData cData = new costumerData();
+		Scanner scan = new Scanner(System.in);
+
+		BorderBox.lineUp();
+		BorderBox.printLine("You entered costumer");
+		String choice;
+		String username, password, confirmPassword, birthday, contactNum;
 		
-		File file = new File(walletPath);
-		Scanner sc = new Scanner(file);
-		String line;
-		boolean isExist = false;
-		while(sc.hasNextLine())
-		{
-			line = sc.nextLine();
-			if(line.contains(cData.getUserName()))
+		BorderBox.printLine("Please choose");
+		BorderBox.printLine("[LOGIN]  [REGISTER]  [GO BACK]");
+		BorderBox.lineDown();
+			do
 			{
-				isExist = true;
+				BorderBox.lineUp();
+				BorderBox.printLine("Enter: ");
+				BorderBox.printInput();
+				choice = scan.nextLine();
+				BorderBox.lineDown();
+				
+				if(Pattern.matches("login|register|go back", choice.toLowerCase()))
+				{
+					break;
+				}
+				
+				BorderBox.printLine("Please enter the correct option");
+			} while(true);
+			
+			switch (choice.toLowerCase()) 
+			{
+			//login
+			case "login":
+				BorderBox.lineUp();
+				BorderBox.printLine("Username: ");
+				BorderBox.printInput();
+				username = scan.nextLine();
+				
+				BorderBox.printLine("Password: ");
+				BorderBox.printInput();
+				password = scan.nextLine();
+				BorderBox.lineDown();
+				
+				if(costumer.isLogin(username, password) == true)
+				{
+					costumer.costumerChoices();
+				}
+				break;
+			//Register
+			case "register":
+				BorderBox.lineUp();
+				BorderBox.printLine("Username: ");
+				BorderBox.printInput();
+				username = scan.nextLine();
+				
+				BorderBox.printLine("Password: ");
+				BorderBox.printInput();
+				password = scan.nextLine();
+				
+				BorderBox.printLine("Re-Enter Password: ");
+				BorderBox.printInput();
+				confirmPassword = scan.nextLine();
+	
+				BorderBox.printLine("Birthday: ");
+				BorderBox.printInput();
+				birthday = scan.nextLine();
+				
+				BorderBox.printLine("contact Number: ");
+				BorderBox.printInput();
+				contactNum = scan.nextLine();
+				BorderBox.lineDown();
+				if(costumer.isRegister(username, password, confirmPassword, birthday, contactNum))
+				{
+					BorderBox.printLine("You've successfully registered ");
+					BorderBox.lineDown();
+				}
+			//Go back
+			case "go back":
 				break;
 			}
-		}
-		
-		if(isExist == false)
-		{
-			FileWriter writer = new FileWriter(walletPath, true);
-			writer.write(cData.getUserName() + ":" + "0" + "\n");
-			writer.flush();
-		}
 	}
 }
 

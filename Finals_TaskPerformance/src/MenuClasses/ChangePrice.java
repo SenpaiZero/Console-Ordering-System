@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import UserInterfaceClasses.BorderBox;
 
-public class changePrice 
+public class ChangePrice 
 {
 	static String mainPath = ".\\src\\Data\\mainMenu.txt";
 	static String drinkPath = ".\\src\\Data\\drinkMenu.txt";
@@ -20,20 +20,18 @@ public class changePrice
 	{
 		String choice;
 		String dish, price;
-		BorderBox.lineUp();
-		BorderBox.printLine("[1] MAIN DISH  [2] DRINKS  [3] DESSERT  [4] SPECIAL MENU  [5] GO BACK");
-		BorderBox.lineDown();
 		
 		do 
 		{
 			BorderBox.lineUp();
+			BorderBox.printLine("[MAIN DISH]  :  [DRINKS]  :  [DESSERT]  :  [SPECIAL MENU]  :  [GO BACK]");
 			BorderBox.printLine("Enter: ");
 			BorderBox.printInput();
 			choice = scan.nextLine();
 			BorderBox.lineDown();
 			
-			//Checks if the user input is 1 to 4 numbers and only 1 character
-			if(Pattern.matches("[1-5]{1}", choice))
+			//Checks the user input
+			if(choice.matches("main dish|drinks|dessert|special menu|go back"))
 			{
 				break;
 			}
@@ -41,44 +39,43 @@ public class changePrice
 			BorderBox.printLine("Please enter the correct option");
 		} while (true);
 
-		if(!choice.equals("5"))
-		{
-			BorderBox.lineUp();
-			BorderBox.printLine("What dish you want to change price?");
+		BorderBox.lineUp();
+		BorderBox.printLine("What dish you want to change price?");
+		BorderBox.printLine("Enter: ");
+		BorderBox.printInput();
+		dish = scan.nextLine();
+		BorderBox.lineDown();
+		
+		do {
+			BorderBox.printLine("What price do you want it to change?");
 			BorderBox.printLine("Enter: ");
-			dish = scan.nextLine();
+			BorderBox.printInput();
+			price = scan.nextLine();
 			BorderBox.lineDown();
 			
-			BorderBox.printLine("What price do you want it to change?");
-			do {
-				BorderBox.printLine("Enter: ");
-				BorderBox.printInput();
-				price = scan.nextLine();
-				BorderBox.lineDown();
-				
-				if(Pattern.matches("\\d+", price)) 
-				{
-					break;
-				}
-				BorderBox.printLine("Please enter integers only");
-			} while(true);
-			
-			switch (Integer.valueOf(choice)) 
+			if(Pattern.matches("\\d+", price)) 
 			{
-			case 1:
-				mainDish(dish, price);
-				break;
-			case 2:
-				drinkDish(dish, price);
-				break;
-			case 3:
-				dessertDish(dish, price);
-				break;
-			case 4:
-				specialDish(dish, price);
 				break;
 			}
+			BorderBox.printLine("Please enter integers only");
+		} while(true);
+		
+		switch (choice.toLowerCase()) 
+		{
+		case "main dish":
+			mainDish(dish, price);
+			break;
+		case "drinks":
+			drinkDish(dish, price);
+			break;
+		case "desser":
+			dessertDish(dish, price);
+			break;
+		case "special menu":
+			specialDish(dish, price);
+			break;
 		}
+	
 	}
 	void mainDish(String dish, String price) throws FileNotFoundException
 	{

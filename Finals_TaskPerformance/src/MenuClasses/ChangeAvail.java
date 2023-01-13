@@ -9,17 +9,19 @@ import java.util.regex.Pattern;
 
 import UserInterfaceClasses.BorderBox;
 
-public class RemoveMenu {
+public class ChangeAvail 
+{
+
 	static String mainPath = ".\\src\\Data\\mainMenu.txt";
 	static String drinkPath = ".\\src\\Data\\drinkMenu.txt";
 	static String dessertPath = ".\\src\\Data\\dessertsMenu.txt";
 	static String specialPath = ".\\src\\Data\\specialMenu.txt";
 	
-	public void removeExistingMenu(Scanner scan) throws FileNotFoundException
+	public void changeAvailability(Scanner scan) throws FileNotFoundException
 	{
 		String choice;
-		String dish;
-			
+		String dish, avail;
+		
 		do 
 		{
 			BorderBox.lineUp();
@@ -39,67 +41,83 @@ public class RemoveMenu {
 		} while (true);
 
 		BorderBox.lineUp();
-		BorderBox.printLine("What dish you want to remove?");
+		BorderBox.printLine("What dish you want to change the availability?");
 		BorderBox.printLine("Enter: ");
-		BorderBox.printInput();
 		dish = scan.nextLine();
 		BorderBox.lineDown();
+
+		do {
+			BorderBox.lineUp();
+			BorderBox.printLine("Please choose");
+			BorderBox.printLine("[AVAILABLE]  :  [NOT AVAILABLE]");
+			BorderBox.printLine("Enter: ");
+			BorderBox.printInput();
+			avail = scan.nextLine();
+			BorderBox.lineDown();
+			
+			if(avail.toLowerCase().matches("available|not available")) 
+			{
+				break;
+			}
+			BorderBox.printLine("Please enter a valid input");
+		} while(true);
 		
-		switch (Integer.valueOf(choice)) 
+		switch (choice.toLowerCase()) 
 		{
-		case 1:
-			mainDish(dish);
+		case "main dish":
+			mainDish(dish, avail);
 			break;
-		case 2:
-			drinkDish(dish);
+		case "drinks":
+			drinkDish(dish, avail);
 			break;
-		case 3:
-			dessertDish(dish);
+		case "dessert":
+			dessertDish(dish, avail);
 			break;
-		case 4:
-			specialDish(dish);
+		case "special menu":
+			specialDish(dish, avail);
 			break;
 		}
 	
 	}
-	void mainDish(String dish) throws FileNotFoundException
+	void mainDish(String dish, String availability) throws FileNotFoundException
 	{
 		File fileMain = new File(mainPath);
 		Scanner scMain = new Scanner(fileMain);
 		
-		printExist(scMain, dish, mainPath);
+		printExist(scMain, dish, availability, mainPath);
 	}
 	
-	void drinkDish(String dish) throws FileNotFoundException
+	void drinkDish(String dish, String availability) throws FileNotFoundException
 	{
 		File fileDrink = new File(drinkPath);
 		Scanner scDrink = new Scanner(fileDrink);
 
-		printExist(scDrink, dish, drinkPath);
+		printExist(scDrink, dish, availability, drinkPath);
 	}
 	
-	void dessertDish(String dish) throws FileNotFoundException
+	void dessertDish(String dish, String availability) throws FileNotFoundException
 	{
 		File fileDessert = new File(dessertPath);
 		Scanner scMain = new Scanner(fileDessert);
 		
-		printExist(scMain, dish, dessertPath);
+		printExist(scMain, dish, availability, dessertPath);
 	}
 	
-	void specialDish(String dish) throws FileNotFoundException
+	void specialDish(String dish, String availability) throws FileNotFoundException
 	{
 		File fileSpecial = new File(specialPath);
 		Scanner scSpecial = new Scanner(fileSpecial);
 
-		printExist(scSpecial, dish, specialPath);
+		printExist(scSpecial, dish, availability, specialPath);
 	}
 	
-	boolean isExisting(Scanner sc, String dish, String path)
+	boolean isExisting(Scanner sc, String dish, String availability, String path)
 	{
 		String line;
 		String[] temp = new String[2];
 		StringBuilder txtTemp = new StringBuilder();
-		boolean isRemove = false;
+		boolean isChanged = false;
+		
 		while (sc.hasNextLine()) 
 		{
 			line = sc.nextLine();
@@ -107,13 +125,22 @@ public class RemoveMenu {
 			
 			if(dish.equalsIgnoreCase(temp[0]))
 			{
-				txtTemp.append("");
-				isRemove = true;
+				if(availability.equalsIgnoreCase("available"))
+				{
+					txtTemp.append(temp[0] + ":" + temp[1] + ":Available");
+				}
+				else
+				{
+					txtTemp.append(temp[0] + ":" + temp[1] + ":Available");
+				}
+				isChanged = true;
 			}
 			else
 			{
-				txtTemp.append(line + "\n");
+				txtTemp.append(line);
 			}
+			
+			txtTemp.append("\n");
 		}
 		try 
 		{
@@ -123,18 +150,18 @@ public class RemoveMenu {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return isRemove;
+		return isChanged;
 	}
 	
-	void printExist(Scanner sc, String dish, String path)
+	void printExist(Scanner sc, String dish, String availability, String path)
 	{
-		if(isExisting(sc, dish, path))
+		if(isExisting(sc, dish, availability, path))
 		{
-			System.out.println("\nYou've successfully removed " + dish);
+			BorderBox.printLine("You've successfully change the availability of " + dish + " to " + availability);
 		}
 		else
 		{
-			System.out.printf("\nThe dish (%s) you entered does not exist", dish);
+			BorderBox.printLine("The dish " + dish + " you entered does not exist");
 		}
 	}
 	

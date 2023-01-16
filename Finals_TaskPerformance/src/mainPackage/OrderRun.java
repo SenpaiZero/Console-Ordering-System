@@ -16,6 +16,7 @@ public class OrderRun {
 			{
 			if(isStart == true) BorderBox.lineUp();
 			isStart = true;
+			
 			BorderBox.lineUp();
 			BorderBox.printLine("Please choose");
 			BorderBox.printLine("[ADMIN]  :  [COSTUMER]  :  [EXIT]");
@@ -28,8 +29,8 @@ public class OrderRun {
 				BorderBox.printInput();
 				userChoice = scan.nextLine();
 				BorderBox.lineDown();
+				
 				//if input is costumer or admin, hihinto na yung loop
-				//mag tutuloy na sa baba yung program
 				if(userChoice.toLowerCase().matches("costumer|admin|exit"))
 				{
 					break;

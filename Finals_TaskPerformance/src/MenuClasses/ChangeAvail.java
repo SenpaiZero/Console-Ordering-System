@@ -4,18 +4,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import UserInterfaceClasses.BorderBox;
+import UserInterfaceClasses.Shop;
+import mainPackage.ShopData;
 
 public class ChangeAvail 
 {
 
-	static String mainPath = ".\\src\\Data\\mainMenu.txt";
-	static String drinkPath = ".\\src\\Data\\drinkMenu.txt";
-	static String dessertPath = ".\\src\\Data\\dessertsMenu.txt";
-	static String specialPath = ".\\src\\Data\\specialMenu.txt";
+	String mainPath = ShopData.mainPath;
+	String drinkPath = ShopData.drinkPath;
+	String dessertPath = ShopData.desertPath;
+	String specialPath = ShopData.specialPath;
 	
 	public void changeAvailability(Scanner scan) throws FileNotFoundException
 	{
@@ -40,9 +43,26 @@ public class ChangeAvail
 			BorderBox.printLine("Please enter the correct option");
 		} while (true);
 
+		switch (choice.toLowerCase()) 
+		{
+		case "main dish":
+			BorderBox.printLine(Arrays.toString(ShopData.main.toArray()));
+			break;
+		case "drinks":
+			BorderBox.printLine(Arrays.toString(ShopData.drink.toArray()));
+			break;
+		case "dessert":
+			BorderBox.printLine(Arrays.toString(ShopData.dessert.toArray()));
+			break;
+		case "special menu":
+			BorderBox.printLine(Arrays.toString(ShopData.special.toArray()));
+			break;
+		}
+		
 		BorderBox.lineUp();
 		BorderBox.printLine("What dish you want to change the availability?");
 		BorderBox.printLine("Enter: ");
+		BorderBox.printInput();
 		dish = scan.nextLine();
 		BorderBox.lineDown();
 
@@ -131,7 +151,7 @@ public class ChangeAvail
 				}
 				else
 				{
-					txtTemp.append(temp[0] + ":" + temp[1] + ":Available");
+					txtTemp.append(temp[0] + ":" + temp[1] + ":Unavailable");
 				}
 				isChanged = true;
 			}
@@ -170,5 +190,8 @@ public class ChangeAvail
 		FileWriter writer = new FileWriter(path);
 		writer.write(String.valueOf(txtWrite));
 		writer.flush();
+
+		ShopData aData = new ShopData();
+		aData.setDishes();
 	}
 }

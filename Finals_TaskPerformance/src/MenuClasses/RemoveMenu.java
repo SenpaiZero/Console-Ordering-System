@@ -4,16 +4,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import UserInterfaceClasses.BorderBox;
+import UserInterfaceClasses.Shop;
+import mainPackage.ShopData;
 
-public class RemoveMenu {
-	static String mainPath = ".\\src\\Data\\mainMenu.txt";
-	static String drinkPath = ".\\src\\Data\\drinkMenu.txt";
-	static String dessertPath = ".\\src\\Data\\dessertsMenu.txt";
-	static String specialPath = ".\\src\\Data\\specialMenu.txt";
+public class RemoveMenu
+{
+
+	String mainPath = ShopData.mainPath;
+	String drinkPath = ShopData.drinkPath;
+	String dessertPath = ShopData.desertPath;
+	String specialPath = ShopData.specialPath;
 	
 	public void removeExistingMenu(Scanner scan) throws FileNotFoundException
 	{
@@ -38,6 +43,22 @@ public class RemoveMenu {
 			BorderBox.printLine("Please enter the correct option");
 		} while (true);
 
+		switch (choice.toLowerCase()) 
+		{
+		case "main dish":
+			BorderBox.printLine(Arrays.toString(ShopData.main.toArray()));
+			break;
+		case "drinks":
+			BorderBox.printLine(Arrays.toString(ShopData.drink.toArray()));
+			break;
+		case "dessert":
+			BorderBox.printLine(Arrays.toString(ShopData.dessert.toArray()));
+			break;
+		case "special menu":
+			BorderBox.printLine(Arrays.toString(ShopData.special.toArray()));
+			break;
+		}
+		
 		BorderBox.lineUp();
 		BorderBox.printLine("What dish you want to remove?");
 		BorderBox.printLine("Enter: ");
@@ -45,18 +66,18 @@ public class RemoveMenu {
 		dish = scan.nextLine();
 		BorderBox.lineDown();
 		
-		switch (Integer.valueOf(choice)) 
+		switch (choice.toLowerCase()) 
 		{
-		case 1:
+		case "main dish":
 			mainDish(dish);
 			break;
-		case 2:
+		case "drinks":
 			drinkDish(dish);
 			break;
-		case 3:
+		case "dessert":
 			dessertDish(dish);
 			break;
-		case 4:
+		case "special menu":
 			specialDish(dish);
 			break;
 		}
@@ -130,11 +151,11 @@ public class RemoveMenu {
 	{
 		if(isExisting(sc, dish, path))
 		{
-			System.out.println("\nYou've successfully removed " + dish);
+			BorderBox.printLine("You've successfully removed " + dish);
 		}
 		else
 		{
-			System.out.printf("\nThe dish (%s) you entered does not exist", dish);
+			BorderBox.printLine("\nThe dish " + dish + " you entered does not exist");
 		}
 	}
 	
@@ -143,5 +164,8 @@ public class RemoveMenu {
 		FileWriter writer = new FileWriter(path);
 		writer.write(String.valueOf(txtWrite));
 		writer.flush();
+
+		ShopData aData = new ShopData();
+		aData.setDishes();
 	}
 }

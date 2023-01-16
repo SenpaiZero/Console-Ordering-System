@@ -3,17 +3,21 @@ package MenuClasses;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import UserInterfaceClasses.BorderBox;
+import UserInterfaceClasses.Shop;
+import mainPackage.ShopData;
 
-public class AddMenu {
-	
-	static String mainPath = ".\\src\\Data\\mainMenu.txt";
-	static String drinkPath = ".\\src\\Data\\drinkMenu.txt";
-	static String desertPath = ".\\src\\Data\\dessertsMenu.txt";
-	static String specialPath = ".\\src\\Data\\specialMenu.txt";
+public class AddMenu 
+{
+
+	String mainPath = ShopData.mainPath;
+	String drinkPath = ShopData.drinkPath;
+	String dessertPath = ShopData.desertPath;
+	String specialPath = ShopData.specialPath;
 	
 	public void AddNewMenu(Scanner scan) throws IOException
 	{
@@ -37,6 +41,22 @@ public class AddMenu {
 			BorderBox.printLine("Please enter the correct option");
 		} while (true);
 		
+		switch (choice.toLowerCase()) 
+		{
+		case "main dish":
+			BorderBox.printLine(Arrays.toString(ShopData.main.toArray()));
+			break;
+		case "drinks":
+			BorderBox.printLine(Arrays.toString(ShopData.drink.toArray()));
+			break;
+		case "dessert":
+			BorderBox.printLine(Arrays.toString(ShopData.dessert.toArray()));
+			break;
+		case "special menu":
+			BorderBox.printLine(Arrays.toString(ShopData.special.toArray()));
+			break;
+		}
+		
 		BorderBox.lineUp();
 		BorderBox.printLine("Enter what dish and price you want to add");
 		BorderBox.printLine("Dish: ");
@@ -55,18 +75,18 @@ public class AddMenu {
 			BorderBox.printLine("Please enter integers only");
 		} while(true);
 		
-		switch (Integer.valueOf(choice)) 
+		switch (choice.toLowerCase()) 
 		{
-		case 1:
+		case "main dish":
 			mainDish(dish, price);
 			break;
-		case 2:
+		case "drinks":
 			drinks(dish, price);
 			break;
-		case 3:
+		case "dessert":
 			desserts(dish, price);
 			break;
-		case 4:
+		case "special menu":
 			specialMenu(dish, price);
 			break;
 		}
@@ -97,12 +117,12 @@ public class AddMenu {
 	
 	public void desserts(String dish, String price) throws IOException
 	{
-		File fileDessert = new File(desertPath);
+		File fileDessert = new File(dessertPath);
 		Scanner scDessert = new Scanner(fileDessert);
 		
 		if(isAvail(scDessert, dish))
 		{
-			write(dish, price, desertPath);
+			write(dish, price, dessertPath);
 		}
 	}
 	
@@ -127,6 +147,7 @@ public class AddMenu {
 			if(data[0].equalsIgnoreCase(dish))
 			{
 				//Stop the code (return) pag may katulad
+				BorderBox.printLine("The dish " + dish + " you entered already exist");
 				return false;
 			} 
 		}
@@ -139,5 +160,9 @@ public class AddMenu {
 		FileWriter writer = new FileWriter(path, true);
 		writer.write("\n" + dish + ":" + price + ":Available");
 		writer.flush();
+
+		ShopData aData = new ShopData();
+		aData.setDishes();
+		BorderBox.printLine(Arrays.toString(ShopData.drink.toArray()));
 	}
 }

@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
+import org.apache.commons.lang3.StringUtils;
+
 import UserInterfaceClasses.Shop;
 
 
@@ -19,6 +21,7 @@ public class HtmlClass {
 	
 	public void setReciept(String[] cart, String[] quantity, double discount, boolean isOpen) throws IOException
 	{
+		costumerData cData = new costumerData();
 		html.delete(0, html.length());
 		total = 0;
 		//Adding value to string builder with string
@@ -64,8 +67,8 @@ public class HtmlClass {
 				+ "  //float: left;\r\n"
 				+ "	height: 60px;\r\n"
 				+ "	width: 60px;\r\n"
-				+ "	background: url(https://banner2.cleanpng.com/20180203/qww/kisspng-coffee-starbucks-logo-sun-valley-ski-education-off-starbucks-logo-5a754d49e88db6.0770890315176369379526.jpg) no-repeat;\r\n"
-				+ "	background-size: 60px 60px;\r\n"
+				+ "	background: url(https://i.imgur.com/jBCrmO1.png) no-repeat;\r\n"
+				+ "	background-size: 80px 80px;\r\n"
 				+ "}\r\n"
 				+ ".clientlogo{\r\n"
 				+ "  float: left;\r\n"
@@ -117,7 +120,7 @@ public class HtmlClass {
 				+ "    <center id=\"top\">\r\n"
 				+ "      <div class=\"logo\"></div>\r\n"
 				+ "      <div class=\"info\"> \r\n"
-				+ "        <h2>Idk what restaurant this is</h2>\r\n"
+				+ "        <h2>WORTHY RESTAURANT</h2>\r\n"
 				+ "      </div><!--End Info-->\r\n"
 				+ "    </center><!--End InvoiceTop-->\r\n"
 				+ "    \r\n"
@@ -125,9 +128,9 @@ public class HtmlClass {
 				+ "      <div class=\"info\">\r\n"
 				+ "        <h2>Contact Info</h2>\r\n"
 				+ "        <p> \r\n"
-				+ "            Address : Balagtas, Blabla blabla</br>\n"
-				+ "            Email   : freefood@gmail.com</br>\n"
-				+ "            Phone   : 555-555-5555</br>\n"
+				+ "            <b>ADDRESS</b>   : " + cData.getAddress() + "</br>\n"
+				+ "            <b>USERNAME</b>   : " + cData.getUserName() + "</br>\n"
+				+ "            <b>Phone</b>   : "+ cData.getContactNumber() +"</br>\n"
 				+ "        </p>\r\n"
 				+ "      </div>\r\n"
 				+ "    </div><!--End Invoice Mid-->\n"
@@ -183,7 +186,6 @@ public class HtmlClass {
 				+ "</html>");
 				
 				//total in console
-				costumerData cData = new costumerData();
 				cData.setTotal(Integer.valueOf((int) (total -((discount / 100) * total))));
 				//Writing and saving the string builder into html
 				FileWriter writer = new FileWriter(htmlPath);
@@ -201,10 +203,11 @@ public class HtmlClass {
 	
 	public static void addTextReciept(List<String> listItem, String[] cart, String[] quantity, int i)
 	{
-		if(listItem.contains(cart[i]))
+		String noVowels = cart[i].replaceAll("[aeiou]", "");
+		if(listItem.stream().anyMatch(cart[i]::equalsIgnoreCase))
 		{
 				html.append("							<tr class=\"service\">\n"
-						+"								<td class=\"tableitem\"><p class=\"itemtext\">"+ cart[i] +"</p></td>\n"
+						+"								<td class=\"tableitem\"><p class=\"itemtext\">"+ noVowels.replaceAll(" ", "_") +"</p></td>\n"
 						+"								<td class=\"tableitem\"><p class=\"itemtext\">"+ quantity[i] +"</p></td>\n"
 						+"								<td class=\"tableitem\"><p class=\"itemtext\">"+ (getPrice(cart[i]) * Integer.valueOf(quantity[i])) +"</p></td>\r\n\n"
 						+"							</tr>\n");

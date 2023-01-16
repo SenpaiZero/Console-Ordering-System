@@ -3,8 +3,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import javax.sound.sampled.LineEvent;
 
 import UserInterfaceClasses.BorderBox;
 import UserInterfaceClasses.CouponUI;
@@ -14,22 +17,31 @@ public class Coupons extends CouponUI
 {
 	static String path = ".\\src\\Data\\couponData.txt";
 	private String[] coupon;
-	private double discount;
-	
+	private static double discount;
 	//Constructor for adding all coupons in string array
-	public Coupons() throws FileNotFoundException {
+	public Coupons() throws FileNotFoundException
+	{
+		refreshCoupon();
+	}
+	
+	//Re-input all of the coupon data in the setter getter
+	public void refreshCoupon() throws FileNotFoundException
+	{
 		File file = new File(path);
 		Scanner sc = new Scanner(file);
+		String[] tempC = new String[1];
 		LinkedList<String> tempCoupon = new LinkedList<String>();
-
+		
+		//check each line of txt file
 		while (sc.hasNextLine()) 
 		{
+			//add each line to tempCoupon arrayList
 			tempCoupon.add(sc.nextLine());
 		}
 		
+		//Set the coupon
 		setCoupons(tempCoupon.toArray(new String[tempCoupon.size()]));
 	}
-	
 	public void removeCoupon(String coupon, boolean isUse) throws IOException
 	{
 		File file = new File(path);
@@ -43,7 +55,7 @@ public class Coupons extends CouponUI
 		{
 			line = sc.nextLine();
 			lineArr = line.split(":");
-			if(coupon.equalsIgnoreCase(lineArr[0]))
+			if(coupon.equals(lineArr[0]))
 			{
 				isExist = true;
 				couponTxt.append("");
@@ -83,8 +95,8 @@ public class Coupons extends CouponUI
 		{
 			line = scan.nextLine();
 			lineArr = line.split(":");
-			//if it exist dont add
-			if(lineArr[0].equalsIgnoreCase(coupon))
+			//if it exist dont savec
+			if(lineArr[0].equals(coupon))
 			{
 				isWrite = false;
 			}
@@ -105,22 +117,21 @@ public class Coupons extends CouponUI
 		}
 	}
 	
-	public boolean useCoupon(String coupon) throws IOException
+	public void useCoupon(String coupon) throws IOException
 	{
 		String line;
-		String[] data = new String[1];
+		String[] data = new String[2];
 		for (int i = 0; i < getCoupon().length; i++) 
 		{
 			line = getCoupon()[i];
 			data = line.split(":");
-			if(data[0].equals(coupon))
+			if(data[0].trim().equals(coupon))
 			{
+				setDiscount(Double.valueOf(data[1].trim()));
 				removeCoupon(coupon, true);
-				setDiscount(Double.valueOf(data[1]));
-				return true;
+				break;
 			}
 		}
-		return false;
 	}
 
 
@@ -131,6 +142,16 @@ public class Coupons extends CouponUI
 	
 	public double getDiscount()
 	{
+		costumerData cData = new costumerData();
+		
+		LocalDate bday = LocalDate.parse(cData.getBirthday());
+		LocalDate localDate = LocalDate.now();
+		
+		if(bday.getDayOfMonth() == localDate.getDayOfMonth()
+				&& bday.getMonth() == localDate.getMonth())
+		{
+			return (discount + 5);
+		}
 		return discount;
 	}
 	
@@ -143,6 +164,7 @@ public class Coupons extends CouponUI
 	{
 		return coupon;
 	}
+	
 	
 }
 

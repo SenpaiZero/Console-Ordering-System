@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.NonWritableChannelException;
 import java.util.Scanner;
 
 import UserInterfaceClasses.BorderBox;
@@ -30,7 +31,7 @@ public class Costumer extends CostumerUI
 			
 			//Index 0: Username
 			//Index 1: Password
-			//Index 2: Birthday (formot: YY-MM-DD)
+			//Index 2: Birthday (formot: YYYY-MM-DD)
 			//Index 3: Contact Number
 			accountInfo = sc.nextLine().split(":");
 			//Check if username and password is correct
@@ -76,9 +77,12 @@ public class Costumer extends CostumerUI
 			FileWriter writer = new FileWriter(path, true);
 			//Save into txt file with the format 
 			//username : password : Birthday : Contact Number
-			writer.write("\n" + userName + ":" + password + ":" + birthday + ":" + contactNum);
+			writer.write(userName + ":" + password + ":" + birthday + ":" + contactNum + "\n");
 			writer.flush();
 			return true;
+		}
+		else {
+			BorderBox.printLine("Incorrect confirm password");
 		}
 		sc.close();
 		return false;
@@ -86,58 +90,65 @@ public class Costumer extends CostumerUI
 	
 	
 	@SuppressWarnings("resource")
-	public void changePassword(String username, String  password, String passwordChange) throws IOException 
+	public boolean changePassword(String currentPass, String newPass, String newPassConfirm) throws IOException 
 	{
 		File file = new File(path);
 		Scanner sc = new Scanner(file);
-
-		File file_temp = new File(path_temp);
-		Scanner sc_temp = new Scanner(file_temp);
-		
-		String[] userInfo = new String[3];
+		StringBuilder sBuild = new StringBuilder();
 		String line;
+		String[] tempData = new String[3];
+		boolean isChange = false, isDone = false;
 		
-		FileWriter writer_temp = new FileWriter(path_temp);
-		FileWriter writer = new FileWriter(path, true);
+		costumerData cData = new costumerData();
 		
-		//Moving original txt file to temp txt file then change the password
+		//Check each line of txt file
 		while (sc.hasNextLine()) 
 		{
 			line = sc.nextLine();
-			userInfo = line.split(":");
-			//Check if the username is correct
-			if(userInfo[0].equals(username)) 
+			tempData = line.split(":");
+			
+			//Check username
+			if(tempData[0].equals(cData.getUserName()))
 			{
-				//check if the password is correct
-				if(userInfo[1].equals(password))
+				//Check current password
+				if(currentPass.equals(tempData[1]))
 				{
-					//Nilagay sa temp txt file yung user information (password changed)
-					writer_temp.write(username + ":" + passwordChange + ":" 
-							+ userInfo[2] + ":" + userInfo[3] + ":" + userInfo[4] + "\n");
+					//confirms the password
+					if(newPass.equals(newPassConfirm))
+					{
+						//save the user input to StringBuilder for temporary data
+						sBuild.append(tempData[0] + ":" + newPass + ":" + tempData[2] + ":" + tempData[3] + "\n");
+						isChange = true;
+						isDone = true;
+					}
+					else
+					{
+						BorderBox.printLine("Please confirm your new password");
+					}
+				}
+				else 
+				{
+					BorderBox.printLine("Incorrect current password");
 				}
 			}
-			else
+			
+			//Prevent saving twice 
+			if(isChange == false)
 			{
-				//Nilagay sa temp txt file yung user information data
-				writer_temp.write(line + "\n");
+				sBuild.append(line + "\n");
+				isChange = false;
 			}
-			writer_temp.flush();
-		}
-		
-		//Instantiating new filewriter para ma-overwrite yung 
-		//original txt file. Bali para maging blanko ulit
-		new FileWriter(file, false);
-		
-		//Moving the temp txt file into original txt file 
-		//each lines ng temp txt ay nireread
-		while (sc_temp.hasNextLine()) 
-		{
-			//Nilalagay yung temporary txt lines sa string 
-			//tapos ilalagay sa original txt files
-			line = sc_temp.nextLine();
-			writer.write(line + "\n");
 			
 		}
-		writer.flush();
+		
+		//save the data if the user input is correct
+		if(isDone == true)
+		{
+			FileWriter writer = new FileWriter(path);
+			writer.write(sBuild.toString());
+			writer.flush();
+			return true;
+		}
+		return false;
 	}
 }

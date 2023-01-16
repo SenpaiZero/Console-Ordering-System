@@ -2,9 +2,19 @@ package mainPackage;
 
 public class costumerData {
 	//User personal information
-	private static String userName, password, contactNumber, birthDay; 
+	private static String userName, password, contactNumber, birthDay, address; 
 	private static int total;
 	
+	
+	public void setAddress(String address)
+	{
+		this.address = address;
+	}
+	
+	public String getAddress()
+	{
+		return address;
+	}
 	
 	public int getTotal()
 	{

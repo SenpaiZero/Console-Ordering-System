@@ -2,6 +2,7 @@ package mainPackage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -20,6 +21,8 @@ public class Payment
 		String userInput;
 
 		HtmlClass html = new HtmlClass();
+		
+		//Setting the value of total
 		html.setReciept(cart.getCartDish(),cart.getCartQuantity(), coupon.getDiscount(), false);
 		int total =  cData.getTotal();
 		
@@ -28,6 +31,7 @@ public class Payment
 		BorderBox.printLine(total + "");
 		BorderBox.lineDown();
 		
+		//Looping for validation of option
 		do
 		{
 			BorderBox.lineUp();
@@ -38,6 +42,7 @@ public class Payment
 			userInput = scan.nextLine();
 			BorderBox.lineDown();
 			
+			//Stop the loop if user input is correct
 			if(userInput.toLowerCase().matches("pay now|cancel"))
 			{
 				break;
@@ -46,6 +51,7 @@ public class Payment
 			BorderBox.printLine("Please enter to correct option");
 		} while(true);
 
+		
 		switch (userInput.toLowerCase()) {
 		case "pay now":
 			Wallet wallet = new Wallet();
@@ -63,6 +69,7 @@ public class Payment
 					userInput = scan.nextLine();
 					BorderBox.lineDown();
 					
+					//Stop the loop if the user input is correct
 					if(userInput.toLowerCase().matches("yes|no"))
 					{
 						break;
@@ -71,6 +78,7 @@ public class Payment
 					BorderBox.printLine("Please choose the correct option");
 				}while(true);
 				
+				//If the user input is yes, call the html and wallet method
 				if(userInput.equalsIgnoreCase("yes"))
 				{
 					html.setReciept(cart.getCartDish(),cart.getCartQuantity(), coupon.getDiscount(), true);
@@ -83,10 +91,12 @@ public class Payment
 					BorderBox.printLine("You cancelled the peyment");
 				}
 			}
+			//If the user balance is not enough
 			else
 			{
 				BorderBox.printLine("Insufficient money");
 				
+				//Looping for option validation
 				do 
 				{
 					BorderBox.lineUp();
@@ -96,6 +106,7 @@ public class Payment
 					userInput = scan.nextLine();
 					BorderBox.lineDown();
 					
+					//stop the loop if the user input is correct
 					if(userInput.toLowerCase().matches("cash in|cancel"))
 					{
 						break;
@@ -103,11 +114,13 @@ public class Payment
 					
 					BorderBox.printLine("Please enter the correct option");
 				} while (true);
+				
 				//cash in method
 				String cashInput;
 				
 				if(userInput.equalsIgnoreCase("cash in"))
 				{
+					//looping for money validation
 					do 
 					{
 						BorderBox.lineUp();
@@ -116,6 +129,7 @@ public class Payment
 						cashInput = scan.nextLine();
 						BorderBox.lineDown();
 						
+						//Stop the loop if the user input is correct
 						if(Pattern.matches("\\d+", cashInput))
 						{
 							break;
@@ -124,6 +138,7 @@ public class Payment
 						BorderBox.printLine("Invalid input");
 					} while (true);
 					
+					//calling method cash in from wallet class
 					wallet.cashIn(Integer.valueOf(cashInput));
 				}
 				else if(userInput.equalsIgnoreCase("cancel"))

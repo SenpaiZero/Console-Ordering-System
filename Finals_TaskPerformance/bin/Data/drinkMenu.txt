@@ -1,6 +1,6 @@
 Blue Lemonade:30:Available
-Mango Juice:30:Available
+Mango Juice:30:Unavailable
 Fresh Brewed Coffee:50:Available
-Beer:80:Available
+Beer:85:Available
 Wine:150:Available
 Cocktail:120:Available

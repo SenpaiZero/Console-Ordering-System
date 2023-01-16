@@ -5,30 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Shop
-{
-	public static String mainPath = ".\\src\\Data\\mainMenu.txt";
-	public static String drinkPath = ".\\src\\Data\\drinkMenu.txt";
-	public static String desertPath = ".\\src\\Data\\dessertsMenu.txt";
-	public static String specialPath = ".\\src\\Data\\specialMenu.txt";
+import javax.swing.border.Border;
 
-	//Made a global variable para di na need mag re-create ng same variable sa ibang method
-	//and to make sure na iisa lang value ng data kada function
-	public static List<String> main = new ArrayList<String>();
-	public static List<String> mainPrice = new ArrayList<String>();
-	public static List<String> mainAvail = new ArrayList<String>();
+import mainPackage.ShopData;
+
+public class Shop extends ShopData
+{
 	
-	public static List<String> drink = new ArrayList<String>();
-	public static List<String> drinkPrice = new ArrayList<String>();
-	public static List<String> drinkAvail = new ArrayList<String>();
-	
-	public static List<String> dessert = new ArrayList<String>();
-	public static List<String> dessertPrice = new ArrayList<String>();
-	public static List<String> dessertAvail = new ArrayList<String>();
-	
-	public static List<String> special = new ArrayList<String>();
-	public static List<String> specialPrice = new ArrayList<String>();
-	public static List<String> specialAvail = new ArrayList<String>();
+	public Shop() throws FileNotFoundException
+	{
+		setDishes();
+	}
 	
 	public void printMenu(
 			String[] main, String[] mainPrice, String[] mainAvail, 
@@ -82,61 +69,12 @@ public class Shop
 	
 	public void printMenu() throws FileNotFoundException 
 	{
-		File fileMain = new File(mainPath);
-		File fileDrink = new File(drinkPath);
-		File fileDessert = new File(desertPath);
-		File fileSpecial = new File(specialPath);
-		Scanner scMain = new Scanner(fileMain);
-		Scanner scDrink = new Scanner(fileDrink);
-		Scanner scDessert = new Scanner(fileDessert);
-		Scanner scSpecial = new Scanner(fileSpecial);
-		
-		String[] line = new String[2];
-		
-		//Get line from txt file
-		//stop if blank
-		while (scMain.hasNextLine()) 
+		if(main.size() <= 0 ||  drink.size() <= 0 
+				|| dessert.size() <= 0 || special.size() <= 0)
 		{
-			line = scMain.nextLine().split(":");
-			main.add(line[0]);
-			mainPrice.add(line[1]);
-			mainAvail.add(line[2]);
-		}
-		
-
-		//Get line from txt file
-		//stop if blank
-		while (scDrink.hasNextLine()) 
-		{
-			//each line sa txt file may menu:price
-			//seseparate into 2 index array
-			//tapos add sa list ung array
-			//index 1: menu
-			//index 2: price
-			line = scDrink.nextLine().split(":");
-			drink.add(line[0]);
-			drinkPrice.add(line[1]);
-			drinkAvail.add(line[2]);
-		}
-		
-		while (scDessert.hasNextLine()) 
-		{
-			line = scDessert.nextLine().split(":");
-			dessert.add(line[0]);
-			dessertPrice.add(line[1]);
-			dessertAvail.add(line[2]);
-		}
-		
-		while (scSpecial.hasNextLine()) 
-		{
-			line = scSpecial.nextLine().split(":");
-			special.add(line[0]);
-			specialPrice.add(line[1]);
-			specialAvail.add(line[2]);
-		}
-		if(main.size() <= 0 ||  drink.size() <= 0)
-		{
-			System.out.println("Something went wrong. Please Try again!");
+			BorderBox.lineUp();
+			BorderBox.printLine("Something went wrong. System is terminating!");
+			BorderBox.lineDown();
 			System.exit(0);
 		}
 		printMenu(
@@ -157,6 +95,8 @@ public class Shop
 				dessertPrice.toArray(new String[dessertPrice.size()]),
 				dessertAvail.toArray(new String[dessertAvail.size()]));
 	}
+	
+	
 	
 	static void printTitle(String title, boolean isFront)
 	{

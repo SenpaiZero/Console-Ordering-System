@@ -89,7 +89,7 @@ public class Wallet extends WalletUI
 			                   
 			if(line.contains(cData.getUserName()))
 			{
-				str.append(temp[0] + ":" + wallet);
+				str.append(temp[0] + ":" + wallet + "\n");
 				break;
 			}
 			else

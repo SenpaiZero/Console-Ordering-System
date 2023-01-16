@@ -1,6 +1,7 @@
 package UserInterfaceClasses;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -14,6 +15,7 @@ public class CouponUI
 		Scanner sc = new Scanner(System.in);
 		Coupons coup = new Coupons();
 		
+		//Looping for option validation
 		do
 		{
 			BorderBox.lineUp();
@@ -24,6 +26,7 @@ public class CouponUI
 			choice = sc.nextLine();
 			BorderBox.lineDown();
 			
+			//Stop the loop if the user input is correct
 			if(choice.toLowerCase().matches("add coupon|remove coupon"))
 			{
 				break;
@@ -34,15 +37,20 @@ public class CouponUI
 		
 		switch (choice.toLowerCase()) {
 		case "add coupon":
+			//Looping for add coupon
 			do
 			{
+				BorderBox.printLine(Arrays.toString(coup.getCoupon()));
 				BorderBox.printLine("Enter coupon and it's discount rate");
 				BorderBox.printLine("Coupon: ");
 				BorderBox.printInput();
 				couponTitle = sc.nextLine();
 				BorderBox.lineDown();
+				
+				//Checking if user input is empty
 				if(!couponTitle.isBlank())
 				{
+					//looping for discount validation
 					do 
 					{
 						BorderBox.printLine("Discount: ");
@@ -50,6 +58,7 @@ public class CouponUI
 						couponRate = sc.nextLine();
 						BorderBox.lineDown();
 						
+						//Stop the loop if the user input is correct
 						if(Pattern.matches("\\d+", couponRate))
 						{
 							break;
@@ -61,9 +70,12 @@ public class CouponUI
 				BorderBox.printLine("Invalid input");
 			} while(true);
 			
+			//calling add coupon method from coupon class
 			coup.addCoupon(couponTitle, couponRate);
 			break;
 		case "remove coupon":
+			BorderBox.printLine(Arrays.toString(coup.getCoupon()));
+			//Looping for coupon validation
 			do
 			{
 				BorderBox.printLine("Enter the coupon you want to remove");
@@ -72,6 +84,7 @@ public class CouponUI
 				couponTitle = sc.nextLine();
 				BorderBox.lineDown();
 				
+				//Stop the loop if the user input is not empty
 				if(!couponTitle.isBlank())
 				{
 					break;
@@ -82,5 +95,9 @@ public class CouponUI
 			coup.removeCoupon(couponTitle, false);
 			break;
 		}
+
+		
+		//Re-enter all coupon on the ArrayList in coupon class
+		coup.refreshCoupon();
 	}
 }

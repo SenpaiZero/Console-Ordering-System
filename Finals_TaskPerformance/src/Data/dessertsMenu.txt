@@ -4,4 +4,4 @@ Chocolate Cake:150:Available
 Mango Cream:85:Available
 Ube Cheesecake:120:Available
 Apple Pie:85:Available
-Halo-Halo:50:not available
+Halo-Halo:50:Not Available

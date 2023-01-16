@@ -4,17 +4,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import UserInterfaceClasses.BorderBox;
+import UserInterfaceClasses.Shop;
+import mainPackage.ShopData;
 
 public class ChangePrice 
 {
-	static String mainPath = ".\\src\\Data\\mainMenu.txt";
-	static String drinkPath = ".\\src\\Data\\drinkMenu.txt";
-	static String dessertPath = ".\\src\\Data\\dessertsMenu.txt";
-	static String specialPath = ".\\src\\Data\\specialMenu.txt";
+
+	String mainPath = ShopData.mainPath;
+	String drinkPath = ShopData.drinkPath;
+	String dessertPath = ShopData.desertPath;
+	String specialPath = ShopData.specialPath;
 	
 	public void changePriceMenu(Scanner scan) throws FileNotFoundException
 	{
@@ -39,6 +43,22 @@ public class ChangePrice
 			BorderBox.printLine("Please enter the correct option");
 		} while (true);
 
+		switch (choice.toLowerCase()) 
+		{
+		case "main dish":
+			BorderBox.printLine(Arrays.toString(ShopData.main.toArray()));
+			break;
+		case "drinks":
+			BorderBox.printLine(Arrays.toString(ShopData.drink.toArray()));
+			break;
+		case "dessert":
+			BorderBox.printLine(Arrays.toString(ShopData.dessert.toArray()));
+			break;
+		case "special menu":
+			BorderBox.printLine(Arrays.toString(ShopData.special.toArray()));
+			break;
+		}
+		
 		BorderBox.lineUp();
 		BorderBox.printLine("What dish you want to change price?");
 		BorderBox.printLine("Enter: ");
@@ -68,7 +88,7 @@ public class ChangePrice
 		case "drinks":
 			drinkDish(dish, price);
 			break;
-		case "desser":
+		case "dessert":
 			dessertDish(dish, price);
 			break;
 		case "special menu":
@@ -148,11 +168,11 @@ public class ChangePrice
 	{
 		if(isExisting(sc, dish, price, path))
 		{
-			System.out.printf("\nYou've successfully change the price of %s to %s ", dish, price);
+			BorderBox.printLine("You've successfully change the price of " + dish +" to " + price + " ");
 		}
 		else
 		{
-			System.out.printf("\nThe dish (%s) you entered does not exist", dish);
+			BorderBox.printLine("The dish " + dish + " you entered does not exist");
 		}
 	}
 	
@@ -161,5 +181,8 @@ public class ChangePrice
 		FileWriter writer = new FileWriter(path);
 		writer.write(String.valueOf(txtWrite));
 		writer.flush();
+		
+		ShopData aData = new ShopData();
+		aData.setDishes();
 	}
 }

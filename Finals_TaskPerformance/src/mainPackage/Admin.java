@@ -14,6 +14,7 @@ public class Admin extends AdminUI
 	ArrayList<String> password = new ArrayList<>();
 	private static boolean isPrint = false;
 	
+	//Constructor for adding fixed admin accounts
 	public Admin() {
 		username.add("admin");
 		password.add("admin");
@@ -34,10 +35,13 @@ public class Admin extends AdminUI
 	public boolean isAdmin(String username, String password)
 	{
 		String user, pass;
+		//get the value of username admin in the arrayList
 		for (int i = 0; i < this.username.size(); i++) 
 		{
 			user = this.username.get(i);
 			pass = this.password.get(i);
+			//Check if username and password that users typed is 
+			//equal to the arrayList
 			if(username.equals(user) && password.equals(pass))
 			{
 				printOnce("you've successfully authenticated");
@@ -45,6 +49,7 @@ public class Admin extends AdminUI
 			}
 		}
 
+		//Go back if the user typed exit on either username or password
 		if(username.equalsIgnoreCase("exit")
 				|| password.equalsIgnoreCase("exit"))
 		{

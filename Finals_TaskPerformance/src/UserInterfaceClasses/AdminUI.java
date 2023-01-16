@@ -83,6 +83,7 @@ public class AdminUI
 	
 	public void showMenu(Admin admin) throws IOException
 	{
+		new Shop();
 		Scanner scan = new Scanner(System.in);
 		String choice;
 		

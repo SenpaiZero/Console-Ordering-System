@@ -16,24 +16,21 @@ public class Cart
 	public void addCart(String dish, String quantity)
 	{
 		boolean isAdd = false;
-		if(searchCart(Shop.main, dish))
+		if(searchCart(Shop.main, Shop.mainAvail, dish))
+		{
+			isAdd = true;
+		} else if(searchCart(Shop.drink, Shop.drinkAvail, dish))
+		{
+			isAdd = true;
+		} else if(searchCart(Shop.dessert, Shop.dessertAvail, dish))
+		{
+			isAdd = true;
+		} else if(searchCart(Shop.special, Shop.specialAvail, dish))
 		{
 			isAdd = true;
 		}
-		
-		if(searchCart(Shop.drink, dish))
-		{
-			isAdd = true;
-		}
-
-		if(searchCart(Shop.dessert, dish))
-		{
-			isAdd = true;
-		}
-		
-		if(searchCart(Shop.special, dish))
-		{
-			isAdd = true;
+		else {
+			BorderBox.printLine("The " + dish + " is not on the menu");
 		}
 		
 		if(isAdd == true)
@@ -43,13 +40,13 @@ public class Cart
 		}
 	}
 	
-	boolean searchCart(List<String> list, String dish)
+	boolean searchCart(List<String> list, List<String> avaiList, String dish)
 	{
 		for (int i = 0; i < list.size(); i++)
 		{
 			if(list.get(i).toString().equalsIgnoreCase(dish))
 			{
-				if(list.get(i).toString().equalsIgnoreCase("available"))
+				if(avaiList.get(i).toString().equalsIgnoreCase("available"))
 				{
 					BorderBox.lineUp();
 					BorderBox.printLine("The " + dish + " has been added to the cart");
@@ -57,11 +54,9 @@ public class Cart
 					return true;
 				}
 				else {
-					BorderBox.printLine(dish + " is unavailable at the moment");
+					BorderBox.printLine(dish + " is not available at the moment");
+					return false;
 				}
-			}
-			else {
-				BorderBox.printLine("The " + dish + " is not on the menu");
 			}
 		}
 		return false;
@@ -91,7 +86,7 @@ public class Cart
 		System.out.printf("                %s %25s %40s %25s %42s%n","║", "ID", "CART", "QUANTITY", "║");
 		for (int i = 0; i < cartDish.size(); i++) 
 		{
-			System.out.printf("                %s %25s %40s %25s %42s%n", "║", (i+1), cartDish.get(i), cartQuantity.get(i), "║");
+			System.out.printf("                %s %25s %40s %25s %42s%n", "║", (i+1), cartDish.get(i).toUpperCase(), cartQuantity.get(i).toUpperCase(), "║");
 		}
 		BorderBox.lineDown();
 	}
@@ -152,11 +147,12 @@ public class Cart
 		case "exit":
 			break;
 		}
+		viewCart();
 	}
 	
 	void removeCart_edit(int id)
 	{
-		if(id >= 1)
+		if(id > 0)
 		{
 			id--;
 			cartDish.remove(id);
@@ -164,7 +160,7 @@ public class Cart
 		}
 		else 
 		{
-			BorderBox.printLine("Invalid input");
+			BorderBox.printLine("Incorrect ID. Please enter a valid ID");
 		}
 	}
 	

@@ -91,6 +91,7 @@ public class Coupons extends CouponUI
 		String line;
 		String[] lineArr = new String[1];
 		boolean isWrite = true;
+		
 		while (scan.hasNextLine())
 		{
 			line = scan.nextLine();
@@ -108,7 +109,7 @@ public class Coupons extends CouponUI
 			BorderBox.printLine("You've successfully added a coupon! ");
 			BorderBox.lineDown();
 			FileWriter writer = new FileWriter(path, true);
-			writer.write("\n"+coupon + ":" + discount);
+			writer.write(coupon + ":" + discount + "\n");
 			writer.flush();
 		}
 		else
@@ -150,7 +151,7 @@ public class Coupons extends CouponUI
 		if(bday.getDayOfMonth() == localDate.getDayOfMonth()
 				&& bday.getMonth() == localDate.getMonth())
 		{
-			return (discount + 5);
+			return (discount + 15);
 		}
 		return discount;
 	}

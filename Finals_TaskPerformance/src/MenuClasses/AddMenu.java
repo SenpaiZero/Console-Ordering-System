@@ -158,7 +158,7 @@ public class AddMenu
 	{
 		BorderBox.printLine("You've successfully added a new dish! ");
 		FileWriter writer = new FileWriter(path, true);
-		writer.write("\n" + dish + ":" + price + ":Available");
+		writer.write(dish + ":" + price + ":Available" + "\n");
 		writer.flush();
 
 		ShopData aData = new ShopData();

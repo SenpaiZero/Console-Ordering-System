@@ -117,12 +117,12 @@ public class AdminUI
 		{
 			BorderBox.lineUp();
 			BorderBox.printInput();
-			System.out.print("\n\t\t\t\t\t\t\t\t\t      Logging off.");
+			System.out.print("\n\t\t\t\t\t\t\t\t\t\t\t      Logging off.");
 			TimeUnit.SECONDS.sleep(1);
 			System.out.print(".");
 			TimeUnit.SECONDS.sleep(1);
 			System.out.print(".");
-			System.out.println("\n\t\t\t\t\t\t\t\t     You've successfully logged out");
+			System.out.println("\n\t\t\t\t\t\t\t\t\t\t     You've successfully logged out");
 			BorderBox.lineDown();
 		} catch (InterruptedException e) 
 		{

@@ -121,6 +121,7 @@ public class RemoveMenu
 		String[] temp = new String[2];
 		StringBuilder txtTemp = new StringBuilder();
 		boolean isRemove = false;
+		
 		while (sc.hasNextLine()) 
 		{
 			line = sc.nextLine();
@@ -155,7 +156,7 @@ public class RemoveMenu
 		}
 		else
 		{
-			BorderBox.printLine("\nThe dish " + dish + " you entered does not exist");
+			BorderBox.printLine("The dish " + dish + " you entered does not exist");
 		}
 	}
 	

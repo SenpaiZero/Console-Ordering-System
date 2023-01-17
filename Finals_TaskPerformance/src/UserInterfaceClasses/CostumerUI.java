@@ -205,8 +205,7 @@ public class CostumerUI
 			{
 				BorderBox.lineUp();
 				BorderBox.printLine("Please choose");
-				BorderBox.printLine("[SHOP]  :  [CHANGE PASSWORD]  :  [WALLET]");
-				BorderBox.printLine("               [LOGOUT]                  ");
+				BorderBox.printLine("[SHOP]  :  [WALLET]  :  [LOGOUT]");
 				BorderBox.printLine("Enter: ");
 				BorderBox.printInput();
 				choices = scan.nextLine();
@@ -230,9 +229,6 @@ public class CostumerUI
 			case "logout":
 				logout();
 				break;
-			case "change password":
-				changePassword();
-				break;
 			}
 		} while(!choices.equalsIgnoreCase("logout"));
 	}
@@ -255,52 +251,6 @@ public class CostumerUI
 			e.printStackTrace();
 		}
 		System.exit(0);
-	}
-
-	void changePassword() throws IOException
-	{
-		Scanner scan = new Scanner(System.in);
-		String currentPass, newPass, newPassConfirm;
-		Costumer cost = new Costumer();
-		
-			BorderBox.lineUp();
-			BorderBox.printLine("Changing your password");
-			BorderBox.printLine("Type \"exit\" to go back");
-			BorderBox.lineDown();
-		do
-		{
-			
-			BorderBox.lineUp();
-			BorderBox.printLine("Enter your current password");
-			BorderBox.printInput();
-			currentPass = scan.nextLine();
-			BorderBox.lineDown();
-			
-			BorderBox.lineUp();
-			BorderBox.printLine("Enter your new password");
-			BorderBox.printInput();
-			newPass = scan.nextLine();
-			BorderBox.lineDown();
-			
-			BorderBox.lineUp();
-			BorderBox.printLine("Confirm your new password");
-			BorderBox.printInput();
-			newPassConfirm = scan.nextLine();
-			BorderBox.lineDown();
-			
-			if(currentPass.equalsIgnoreCase("exit")
-					|| newPass.equalsIgnoreCase("exit")
-					|| newPassConfirm.equalsIgnoreCase("exit"))
-			{
-				break;
-			}
-			
-			if(cost.changePassword(currentPass, newPass, newPassConfirm))
-			{
-				BorderBox.printLine("Password have been changed");
-				break;
-			}
-		} while(true);
 	}
 	
 	public void showMenu() throws IOException
@@ -399,11 +349,20 @@ public class CostumerUI
 						confirmPassword = scan.nextLine();
 						BorderBox.lineDown();
 						
-						//Check if password does not have space
-						if(!password.contains(" "))
+						if(password.equals(confirmPassword))
 						{
 							break;
 						}
+						else if(!password.equals(confirmPassword)){
+							BorderBox.printLine("Incorrect");
+							continue;
+						}
+						//Check if password does not have space
+						if(!password.isEmpty())
+						{
+							break;
+						}
+						
 						BorderBox.printLine("Invalid password, Pleae try again");
 					} while (true);
 					

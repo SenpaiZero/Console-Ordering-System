@@ -82,11 +82,11 @@ public class Cart
 	{
 		
 		BorderBox.lineUp();
-		System.out.printf("                %s %25s %44s %21s %42s%n%n","║", "", "YOUR CART", "", "║");
-		System.out.printf("                %s %25s %40s %25s %42s%n","║", "ID", "CART", "QUANTITY", "║");
+		System.out.printf("                %s %25s %44s %21s %52s%n%n","║", "", "YOUR CART", "", "║");
+		System.out.printf("                %s %25s %40s %25s %52s%n","║", "ID", "CART", "QUANTITY", "║");
 		for (int i = 0; i < cartDish.size(); i++) 
 		{
-			System.out.printf("                %s %25s %40s %25s %42s%n", "║", (i+1), cartDish.get(i).toUpperCase(), cartQuantity.get(i).toUpperCase(), "║");
+			System.out.printf("                %s %25s %40s %25s %52s%n", "║", (i+1), cartDish.get(i).toUpperCase(), cartQuantity.get(i).toUpperCase(), "║");
 		}
 		BorderBox.lineDown();
 	}
@@ -166,7 +166,7 @@ public class Cart
 	
 	void changeQuantityCart(int id, String quantity)
 	{
-		if(id >= 1 && Integer.valueOf(quantity) >= 1)
+		if(id > 0 && Integer.valueOf(quantity) > 0)
 		{
 			id--;
 			cartQuantity.set(id, quantity);

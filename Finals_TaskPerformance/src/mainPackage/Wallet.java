@@ -104,16 +104,6 @@ public class Wallet extends WalletUI
 		
 	}
 	
-	public void setWallet(int balance)
-	{
-		this.balance = balance;
-	}
-	
-	public int getWallet()
-	{
-		return balance;
-	}
-	
 	public void cashIn(int cash) throws IOException
 	{
 		if(cash > 0)
@@ -142,6 +132,16 @@ public class Wallet extends WalletUI
 		{
 			BorderBox.printLine("Insufficient Funds");
 		}
+	}
+	
+	public void setWallet(int balance)
+	{
+		this.balance = balance;
+	}
+	
+	public int getWallet()
+	{
+		return balance;
 	}
 	
 }

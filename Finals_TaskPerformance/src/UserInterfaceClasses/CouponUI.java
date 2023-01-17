@@ -138,17 +138,25 @@ public class CouponUI
 			user = scan.nextLine();
 			BorderBox.lineDown();
 			
+			if(coupon.getCoupon().length <= 0)
+			{
+				BorderBox.printLine("There are currently no coupons available");
+				break;
+			}
+			
 			String[] data = new String[1];
 			for (int i = 0; i < coupon.getCoupon().length; i++) 
 			{
 				data = coupon.getCoupon()[i].split(":");
-				if(user.equalsIgnoreCase("exit"))
+				if(user.toLowerCase().matches("exit|go back"))
 				{
 					isAllowed = true;
+					break;
 				}
 				
 				if(user.equals(data[0]))
 				{
+					coupon.setCoupon_use(user);
 					coupon.useCoupon(user);
 					BorderBox.printLine("You've successfully used a coupon!");
 					isAllowed = true;

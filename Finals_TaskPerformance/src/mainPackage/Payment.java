@@ -79,12 +79,21 @@ public class Payment
 				if(userInput.equalsIgnoreCase("yes"))
 				{
 					html.setReciept(cart.getCartDish(),cart.getCartQuantity(), coupon.getDiscount(), true);
+
+					coupon.removeCoupon(coupon.getCoupon_user(), true);
 					BorderBox.printLine("You've successfully paid " + total);
 					wallet.changeBalance(total, false);
 					
+					BorderBox.lineDown();
+					
+					System.out.println();
 					System.out.println();
 					BorderBox.lineUp();
+					BorderBox.printLine("");
+					BorderBox.printLine("");
 					BorderBox.printLine("SYSTEM IS TERMINATING");
+					BorderBox.printLine("");
+					BorderBox.printLine("");
 					BorderBox.lineDown();
 					System.exit(0);
 				}

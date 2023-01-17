@@ -211,7 +211,7 @@ public class ChangeAvail
 				}
 				else
 				{
-					txtTemp.append(temp[0] + ":" + temp[1] + ":Unavailable");
+					txtTemp.append(temp[0] + ":" + temp[1] + ":Not Aavailable");
 				}
 				isChanged = true;
 			}

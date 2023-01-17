@@ -18,6 +18,7 @@ public class Coupons extends CouponUI
 	static String path = ".\\src\\Data\\couponData.txt";
 	private String[] coupon;
 	private static double discount;
+	static String couponUse;
 	//Constructor for adding all coupons in string array
 	public Coupons() throws FileNotFoundException
 	{
@@ -129,7 +130,6 @@ public class Coupons extends CouponUI
 			if(data[0].trim().equals(coupon))
 			{
 				setDiscount(Double.valueOf(data[1].trim()));
-				removeCoupon(coupon, true);
 				break;
 			}
 		}
@@ -164,6 +164,17 @@ public class Coupons extends CouponUI
 	public String[] getCoupon()
 	{
 		return coupon;
+	}
+	
+	//Setting the coupon that the user used
+	public void setCoupon_use(String couponUse)
+	{
+		this.couponUse = couponUse;
+	}
+	
+	public String getCoupon_user()
+	{
+		return couponUse;
 	}
 	
 	

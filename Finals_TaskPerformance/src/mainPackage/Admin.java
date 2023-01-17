@@ -13,23 +13,26 @@ public class Admin extends AdminUI
 	ArrayList<String> username = new ArrayList<>();
 	ArrayList<String> password = new ArrayList<>();
 	private static boolean isPrint = false;
+	private static boolean once = false;
 	
 	//Constructor for adding fixed admin accounts
 	public Admin() {
-		username.add("admin");
-		password.add("admin");
+			once = true;
+			username.add("admin");
+			password.add("admin");
+			
+			username.add("ygi");
+			password.add("santos");
+			
+			username.add("dean");
+			password.add("boringot");
+			
+			username.add("kyla");
+			password.add("arquio");
+			
+			username.add("mark");
+			password.add("agustin");
 		
-		username.add("ygi");
-		password.add("santos");
-		
-		username.add("dean");
-		password.add("boringot");
-		
-		username.add("kyla");
-		password.add("arquio");
-		
-		username.add("mark");
-		password.add("agustin");
 	}
 	
 	public boolean isAdmin(String username, String password)
@@ -49,19 +52,7 @@ public class Admin extends AdminUI
 			}
 		}
 
-		//Go back if the user typed exit on either username or password
-		if(username.equalsIgnoreCase("exit")
-				|| password.equalsIgnoreCase("exit"))
-		{
-			BorderBox.lineUp();
-			BorderBox.printLine("The system has stopped");
-			BorderBox.lineDown();
-			System.exit(0);
-		}
-		else
-		{
-			BorderBox.printLine("Incorrect admin information");
-		}
+		BorderBox.printLine("Incorrect admin information");
 		return false;
 	}
 	

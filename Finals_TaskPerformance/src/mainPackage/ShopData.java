@@ -44,6 +44,7 @@ public class ShopData
 		File fileDrink = new File(drinkPath);
 		File fileDessert = new File(desertPath);
 		File fileSpecial = new File(specialPath);
+	    //nilipat lang ung mga file sa scanner para ma scan ung mga laman ng file
 		Scanner scMain = new Scanner(fileMain);
 		Scanner scDrink = new Scanner(fileDrink);
 		Scanner scDessert = new Scanner(fileDessert);
@@ -59,8 +60,6 @@ public class ShopData
 			mainPrice.add(line[1]);
 			mainAvail.add(line[2]);
 		}
-		
-
 		//Get line from txt file
 		//stop if blank
 		while (scDrink.hasNextLine()) 

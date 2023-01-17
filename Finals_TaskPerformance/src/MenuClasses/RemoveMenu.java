@@ -25,64 +25,121 @@ public class RemoveMenu
 		String choice;
 		String dish;
 			
-		do 
+		do
 		{
-			BorderBox.lineUp();
-			BorderBox.printLine("[MAIN DISH]  :  [DRINKS]  :  [DESSERT]  :  [SPECIAL MENU]  :  [GO BACK]");
-			BorderBox.printLine("Enter: ");
-			BorderBox.printInput();
-			choice = scan.nextLine();
-			BorderBox.lineDown();
+			do 
+			{
+				BorderBox.lineUp();
+				BorderBox.printLine("[MAIN DISH]  :  [DRINKS]  :  [DESSERT]  :  [SPECIAL MENU]  :  [GO BACK]");
+				BorderBox.printLine("Enter: ");
+				BorderBox.printInput();
+				choice = scan.nextLine();
+				BorderBox.lineDown();
+				
+				//Checks the user input
+				if(choice.matches("main dish|drinks|dessert|special menu|go back"))
+				{
+					break;
+				}
+				
+				BorderBox.printLine("Please enter the correct option");
+			} while (true);
+	
+			switch (choice.toLowerCase()) 
+			{
+			case "main dish":
+				BorderBox.printLine(Arrays.toString(ShopData.main.toArray()));
+				break;
+			case "drinks":
+				BorderBox.printLine(Arrays.toString(ShopData.drink.toArray()));
+				break;
+			case "dessert":
+				BorderBox.printLine(Arrays.toString(ShopData.dessert.toArray()));
+				break;
+			case "special menu":
+				BorderBox.printLine(Arrays.toString(ShopData.special.toArray()));
+				break;
+			}
 			
-			//Checks the user input
-			if(choice.matches("main dish|drinks|dessert|special menu|go back"))
+			if(choice.equalsIgnoreCase("go back"))
 			{
 				break;
 			}
 			
-			BorderBox.printLine("Please enter the correct option");
-		} while (true);
-
-		switch (choice.toLowerCase()) 
-		{
-		case "main dish":
-			BorderBox.printLine(Arrays.toString(ShopData.main.toArray()));
-			break;
-		case "drinks":
-			BorderBox.printLine(Arrays.toString(ShopData.drink.toArray()));
-			break;
-		case "dessert":
-			BorderBox.printLine(Arrays.toString(ShopData.dessert.toArray()));
-			break;
-		case "special menu":
-			BorderBox.printLine(Arrays.toString(ShopData.special.toArray()));
-			break;
-		}
-		
-		BorderBox.lineUp();
-		BorderBox.printLine("What dish you want to remove?");
-		BorderBox.printLine("Enter: ");
-		BorderBox.printInput();
-		dish = scan.nextLine();
-		BorderBox.lineDown();
-		
-		switch (choice.toLowerCase()) 
-		{
-		case "main dish":
-			mainDish(dish);
-			break;
-		case "drinks":
-			drinkDish(dish);
-			break;
-		case "dessert":
-			dessertDish(dish);
-			break;
-		case "special menu":
-			specialDish(dish);
-			break;
-		}
-	
+			boolean isExit;
+			
+			do
+			{
+				isExit = false;
+				BorderBox.lineUp();
+				BorderBox.printLine("What dish you want to remove?");
+				BorderBox.printLine("Enter: ");
+				BorderBox.printInput();
+				dish = scan.nextLine();
+				BorderBox.lineDown();
+				
+				if(dish.toLowerCase().matches("exit|go back"))
+				{
+					isExit = true;
+					break;
+				}
+				else if(checkMenu(dish))
+				{
+					break;
+				}
+				
+			BorderBox.printLine("The dish \"" + dish + "\" you entered does not exist");
+			} while(true);
+			
+			if(isExit == true)
+			{
+				break;
+			}
+			
+			switch (choice.toLowerCase()) 
+			{
+			case "main dish":
+				mainDish(dish);
+				break;
+			case "drinks":
+				drinkDish(dish);
+				break;
+			case "dessert":
+				dessertDish(dish);
+				break;
+			case "special menu":
+				specialDish(dish);
+				break;
+			}
+		} while(true);
 	}
+	
+	boolean checkMenu(String input)
+	{
+
+		if(ShopData.main.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		if(ShopData.drink.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		if(ShopData.dessert.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		if(ShopData.special.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
 	void mainDish(String dish) throws FileNotFoundException
 	{
 		File fileMain = new File(mainPath);
@@ -153,10 +210,6 @@ public class RemoveMenu
 		if(isExisting(sc, dish, path))
 		{
 			BorderBox.printLine("You've successfully removed " + dish);
-		}
-		else
-		{
-			BorderBox.printLine("The dish " + dish + " you entered does not exist");
 		}
 	}
 	

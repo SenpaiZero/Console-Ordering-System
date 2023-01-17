@@ -77,4 +77,22 @@ public class WalletUI
 			break;
 		}
 	}
+	
+	public void menu()
+	{
+		Scanner scan = new Scanner(System.in);
+		String user;
+		
+		System.out.println("Please enter:  [1] CASH IN   [2] CASH OUT  [3] GO BACK");
+		System.out.print("Enter: ");
+		user = scan.nextLine();
+		switch (user) {
+		case "1":
+			break;
+		case "2":
+			break;
+		default:
+			break;
+		}
+	}
 }

@@ -5,11 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import UserInterfaceClasses.AdminUI;
 import UserInterfaceClasses.BorderBox;
 import UserInterfaceClasses.Shop;
+import mainPackage.Admin;
 import mainPackage.ShopData;
 
 public class ChangeAvail 
@@ -25,80 +28,137 @@ public class ChangeAvail
 		String choice;
 		String dish, avail;
 		
-		do 
+		do
 		{
-			BorderBox.lineUp();
-			BorderBox.printLine("[MAIN DISH]  :  [DRINKS]  :  [DESSERT]  :  [SPECIAL MENU]  :  [GO BACK]");
-			BorderBox.printLine("Enter: ");
-			BorderBox.printInput();
-			choice = scan.nextLine();
-			BorderBox.lineDown();
+			do 
+			{
+				BorderBox.lineUp();
+				BorderBox.printLine("[MAIN DISH]  :  [DRINKS]  :  [DESSERT]  :  [SPECIAL MENU]  :  [GO BACK]");
+				BorderBox.printLine("Enter: ");
+				BorderBox.printInput();
+				choice = scan.nextLine();
+				BorderBox.lineDown();
+				
+				//Checks the user input
+				if(choice.matches("main dish|drinks|dessert|special menu|go back"))
+				{
+					break;
+				}
+				
+				BorderBox.printLine("Please enter the correct option");
+			} while (true);
+
+			switch (choice.toLowerCase()) 
+			{
+			case "main dish":
+				BorderBox.printLine(Arrays.toString(ShopData.main.toArray()));
+				break;
+			case "drinks":
+				BorderBox.printLine(Arrays.toString(ShopData.drink.toArray()));
+				break;
+			case "dessert":
+				BorderBox.printLine(Arrays.toString(ShopData.dessert.toArray()));
+				break;
+			case "special menu":
+				BorderBox.printLine(Arrays.toString(ShopData.special.toArray()));
+				break;
+			}
 			
-			//Checks the user input
-			if(choice.matches("main dish|drinks|dessert|special menu|go back"))
+			if(choice.equalsIgnoreCase("go back"))
 			{
 				break;
 			}
 			
-			BorderBox.printLine("Please enter the correct option");
-		} while (true);
-
-		switch (choice.toLowerCase()) 
-		{
-		case "main dish":
-			BorderBox.printLine(Arrays.toString(ShopData.main.toArray()));
-			break;
-		case "drinks":
-			BorderBox.printLine(Arrays.toString(ShopData.drink.toArray()));
-			break;
-		case "dessert":
-			BorderBox.printLine(Arrays.toString(ShopData.dessert.toArray()));
-			break;
-		case "special menu":
-			BorderBox.printLine(Arrays.toString(ShopData.special.toArray()));
-			break;
-		}
-		
-		BorderBox.lineUp();
-		BorderBox.printLine("What dish you want to change the availability?");
-		BorderBox.printLine("Enter: ");
-		BorderBox.printInput();
-		dish = scan.nextLine();
-		BorderBox.lineDown();
-
-		do {
+			boolean isExit;
+			do
+			{
+			isExit = false;
 			BorderBox.lineUp();
-			BorderBox.printLine("Please choose");
-			BorderBox.printLine("[AVAILABLE]  :  [NOT AVAILABLE]");
+			BorderBox.printLine("What dish you want to change the availability?");
 			BorderBox.printLine("Enter: ");
 			BorderBox.printInput();
-			avail = scan.nextLine();
+			dish = scan.nextLine();
 			BorderBox.lineDown();
 			
-			if(avail.toLowerCase().matches("available|not available")) 
+				if(dish.toLowerCase().matches("exit|go back"))
+				{
+					isExit = true;
+					break;
+				}
+				else if(checkMenu(dish))
+				{
+					break;
+				}
+
+			BorderBox.printLine("The dish \"" + dish + "\" you entered does not exist");
+			} while(true);
+			
+			if(isExit == true)
 			{
 				break;
 			}
-			BorderBox.printLine("Please enter a valid input");
+			
+			do {
+				BorderBox.lineUp();
+				BorderBox.printLine("Please choose");
+				BorderBox.printLine("[AVAILABLE]  :  [NOT AVAILABLE]");
+				BorderBox.printLine("Enter: ");
+				BorderBox.printInput();
+				avail = scan.nextLine();
+				BorderBox.lineDown();
+				
+				
+				if(avail.toLowerCase().matches("available|not available")) 
+				{
+					break;
+				}
+				BorderBox.printLine("Please enter a valid input");
+			} while(true);
+			
+			switch (choice.toLowerCase()) 
+			{
+			case "main dish":
+				mainDish(dish, avail);
+				break;
+			case "drinks":
+				drinkDish(dish, avail);
+				break;
+			case "dessert":
+				dessertDish(dish, avail);
+				break;
+			case "special menu":
+				specialDish(dish, avail);
+				break;
+			}
 		} while(true);
-		
-		switch (choice.toLowerCase()) 
-		{
-		case "main dish":
-			mainDish(dish, avail);
-			break;
-		case "drinks":
-			drinkDish(dish, avail);
-			break;
-		case "dessert":
-			dessertDish(dish, avail);
-			break;
-		case "special menu":
-			specialDish(dish, avail);
-			break;
-		}
-	
 	}
+	
+	boolean checkMenu(String input)
+	{
+
+		if(ShopData.main.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		if(ShopData.drink.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		if(ShopData.dessert.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		if(ShopData.special.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
 	void mainDish(String dish, String availability) throws FileNotFoundException
 	{
 		File fileMain = new File(mainPath);
@@ -178,10 +238,6 @@ public class ChangeAvail
 		if(isExisting(sc, dish, availability, path))
 		{
 			BorderBox.printLine("You've successfully change the availability of " + dish + " to " + availability);
-		}
-		else
-		{
-			BorderBox.printLine("The dish " + dish + " you entered does not exist");
 		}
 	}
 	

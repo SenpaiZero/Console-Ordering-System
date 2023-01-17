@@ -4,4 +4,4 @@ Fresh Brewed Coffee:50:Available
 Beer:85:Available
 Wine:150:Available
 Cocktail:120:Available
-mj sweats:69:Available
+test asd:50:Available

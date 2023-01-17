@@ -14,6 +14,7 @@ public class AdminUI
 		Scanner scan = new Scanner(System.in);
 		Admin admin = new Admin();
 		String username, password;
+		boolean isLogout = false;
 		do 
 		{
 			BorderBox.lineUp();
@@ -29,6 +30,13 @@ public class AdminUI
 			BorderBox.printInput();
 			password = scan.nextLine();
 			BorderBox.lineDown();
+			
+			
+			if(username.toLowerCase().matches("go back|exit")
+					|| password.matches("go back|exit"))
+			{
+				break;
+			}
 			
 			//Gagana if tama yung input ng admin username at password
 			while (admin.isAdmin(username, password)) 
@@ -56,7 +64,7 @@ public class AdminUI
 					BorderBox.printLine("Please enter the correct option");
 				} while (true);
 				//End of looping ng menu and coupon
-				
+
 				//Mag tutuloy dito if tama yung input ng user sa menu or coupon
 				switch (choice.toLowerCase()) 
 				{
@@ -71,12 +79,17 @@ public class AdminUI
 					Coupons coupon = new Coupons();
 					coupon.showMenu();
 					break;
-				case "logout":
-					logout();
-					break;
 				}
 				
+				if(choice.equalsIgnoreCase("logout"))
+				{
+					logout();
+					isLogout = true;
+					break;
+				}
 			}
+
+			if(isLogout == true) break;
 		} while (true);
 		//End of looping ng user input for admin username and password
 	}
@@ -117,17 +130,16 @@ public class AdminUI
 		{
 			BorderBox.lineUp();
 			BorderBox.printInput();
-			System.out.print("\n\t\t\t\t\t\t\t\t\t\t\t      Logging off.");
+			System.out.print("\n\t\t\t\t\t\t\t\t\t\t  Logging off.");
 			TimeUnit.SECONDS.sleep(1);
 			System.out.print(".");
 			TimeUnit.SECONDS.sleep(1);
 			System.out.print(".");
-			System.out.println("\n\t\t\t\t\t\t\t\t\t\t     You've successfully logged out");
+			System.out.println("\n\t\t\t\t\t\t\t\t\t You've successfully logged out");
 			BorderBox.lineDown();
 		} catch (InterruptedException e) 
 		{
 			e.printStackTrace();
 		}
-		System.exit(0);
 	}
 }

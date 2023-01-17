@@ -13,7 +13,7 @@ public class OrderRun {
 		boolean isStart = false;
 		header();
 		do
-			{
+		{
 			if(isStart == true) BorderBox.lineUp();
 			isStart = true;
 			
@@ -51,7 +51,7 @@ public class OrderRun {
 				//if the user input is costumer
 				case "costumer":
 					Costumer costumer = new Costumer();
-					costumer.showMenu();
+					costumer.startMenu();
 					break;
 				//if the user input is exit
 				case "exit":

@@ -25,78 +25,134 @@ public class ChangePrice
 		String choice;
 		String dish, price;
 		
-		do 
+		do
 		{
-			BorderBox.lineUp();
-			BorderBox.printLine("[MAIN DISH]  :  [DRINKS]  :  [DESSERT]  :  [SPECIAL MENU]  :  [GO BACK]");
-			BorderBox.printLine("Enter: ");
-			BorderBox.printInput();
-			choice = scan.nextLine();
-			BorderBox.lineDown();
-			
-			//Checks the user input
-			if(choice.matches("main dish|drinks|dessert|special menu|go back"))
+			do 
 			{
-				break;
-			}
-			
-			BorderBox.printLine("Please enter the correct option");
-		} while (true);
-
-		switch (choice.toLowerCase()) 
-		{
-		case "main dish":
-			BorderBox.printLine(Arrays.toString(ShopData.main.toArray()));
-			break;
-		case "drinks":
-			BorderBox.printLine(Arrays.toString(ShopData.drink.toArray()));
-			break;
-		case "dessert":
-			BorderBox.printLine(Arrays.toString(ShopData.dessert.toArray()));
-			break;
-		case "special menu":
-			BorderBox.printLine(Arrays.toString(ShopData.special.toArray()));
-			break;
-		}
-		
-		BorderBox.lineUp();
-		BorderBox.printLine("What dish you want to change price?");
-		BorderBox.printLine("Enter: ");
-		BorderBox.printInput();
-		dish = scan.nextLine();
-		BorderBox.lineDown();
-		
-		do {
-			BorderBox.printLine("What price do you want it to change?");
-			BorderBox.printLine("Enter: ");
-			BorderBox.printInput();
-			price = scan.nextLine();
-			BorderBox.lineDown();
-			
-			if(Pattern.matches("\\d+", price)) 
-			{
-				break;
-			}
-			BorderBox.printLine("Please enter integers only");
-		} while(true);
-		
-		switch (choice.toLowerCase()) 
-		{
-		case "main dish":
-			mainDish(dish, price);
-			break;
-		case "drinks":
-			drinkDish(dish, price);
-			break;
-		case "dessert":
-			dessertDish(dish, price);
-			break;
-		case "special menu":
-			specialDish(dish, price);
-			break;
-		}
+				BorderBox.lineUp();
+				BorderBox.printLine("[MAIN DISH]  :  [DRINKS]  :  [DESSERT]  :  [SPECIAL MENU]  :  [GO BACK]");
+				BorderBox.printLine("Enter: ");
+				BorderBox.printInput();
+				choice = scan.nextLine();
+				BorderBox.lineDown();
+				
+				//Checks the user input
+				if(choice.matches("main dish|drinks|dessert|special menu|go back"))
+				{
+					break;
+				}
+				
+				BorderBox.printLine("Please enter the correct option");
+			} while (true);
 	
+			switch (choice.toLowerCase()) 
+			{
+			case "main dish":
+				BorderBox.printLine(Arrays.toString(ShopData.main.toArray()));
+				break;
+			case "drinks":
+				BorderBox.printLine(Arrays.toString(ShopData.drink.toArray()));
+				break;
+			case "dessert":
+				BorderBox.printLine(Arrays.toString(ShopData.dessert.toArray()));
+				break;
+			case "special menu":
+				BorderBox.printLine(Arrays.toString(ShopData.special.toArray()));
+				break;
+			}
+			
+			if(choice.equalsIgnoreCase("go back"))
+			{
+				break;
+			}
+			
+			boolean isExit;
+			do
+			{
+				isExit = false;
+				BorderBox.lineUp();
+				BorderBox.printLine("What dish you want to change price?");
+				BorderBox.printLine("Enter: ");
+				BorderBox.printInput();
+				dish = scan.nextLine();
+				BorderBox.lineDown();
+	
+				if(dish.toLowerCase().matches("exit|go back"))
+				{
+					isExit = true;
+					break;
+				}
+				else if(checkMenu(dish))
+				{
+					break;
+				}
+	
+				BorderBox.printLine("The dish \"" + dish + "\" you entered does not exist");
+			} while(true);
+			
+			if(isExit == true)
+			{
+				break;
+			}
+			
+			do {
+				BorderBox.printLine("What price do you want it to change?");
+				BorderBox.printLine("Enter: ");
+				BorderBox.printInput();
+				price = scan.nextLine();
+				BorderBox.lineDown();
+				
+				if(Pattern.matches("\\d+", price)) 
+				{
+					break;
+				}
+				BorderBox.printLine("Please enter integers only");
+			} while(true);
+			
+			switch (choice.toLowerCase()) 
+			{
+			case "main dish":
+				mainDish(dish, price);
+				break;
+			case "drinks":
+				drinkDish(dish, price);
+				break;
+			case "dessert":
+				dessertDish(dish, price);
+				break;
+			case "special menu":
+				specialDish(dish, price);
+				break;
+			}
+		} while(true);
 	}
+	
+	boolean checkMenu(String input)
+	{
+
+		if(ShopData.main.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		if(ShopData.drink.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		if(ShopData.dessert.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		if(ShopData.special.stream().anyMatch(input::equalsIgnoreCase))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
 	void mainDish(String dish, String price) throws FileNotFoundException
 	{
 		File fileMain = new File(mainPath);

@@ -124,9 +124,9 @@ public class Cart
 				BorderBox.printLine("Enter ID:");
 				BorderBox.printInput();
 				id = scanner.nextLine();
-				if(Pattern.matches("^[0-9]", id))
+				if(Pattern.matches("\\d+", id))
 				{
-					if(cartDish.size() < Integer.valueOf(id))
+					if(cartDish.size() >= Integer.valueOf(id))
 					{
 						BorderBox.printLine("Enter Quantity: ");
 						BorderBox.printInput();

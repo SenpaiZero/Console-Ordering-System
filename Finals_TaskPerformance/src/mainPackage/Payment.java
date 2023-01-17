@@ -1,9 +1,6 @@
 package mainPackage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -84,11 +81,16 @@ public class Payment
 					html.setReciept(cart.getCartDish(),cart.getCartQuantity(), coupon.getDiscount(), true);
 					BorderBox.printLine("You've successfully paid " + total);
 					wallet.changeBalance(total, false);
-					//set wallet new balance
+					
+					System.out.println();
+					BorderBox.lineUp();
+					BorderBox.printLine("SYSTEM IS TERMINATING");
+					BorderBox.lineDown();
+					System.exit(0);
 				}
 				else
 				{
-					BorderBox.printLine("You cancelled the peyment");
+					BorderBox.printLine("You cancelled the payment");
 				}
 			}
 			//If the user balance is not enough

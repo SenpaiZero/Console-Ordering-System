@@ -78,19 +78,18 @@ public class Shop extends ShopData
 			System.exit(0);
 		}
 		printMenu(
-				//Main
 				main.toArray(new String[main.size()]), 
 				mainPrice.toArray(new String[mainPrice.size()]),
 				mainAvail.toArray(new String[mainAvail.size()]),
-				//Drink
+				
 				drink.toArray(new String[drink.size()]), 
 				drinkPrice.toArray(new String[drinkPrice.size()]),
 				drinkAvail.toArray(new String[drinkAvail.size()]),
-				//Special
+				
 				special.toArray(new String[special.size()]), 
 				specialPrice.toArray(new String[specialPrice.size()]),
 				specialAvail.toArray(new String[specialAvail.size()]),
-				//Dessers
+				
 				dessert.toArray(new String[dessert.size()]),
 				dessertPrice.toArray(new String[dessertPrice.size()]),
 				dessertAvail.toArray(new String[dessertAvail.size()]));

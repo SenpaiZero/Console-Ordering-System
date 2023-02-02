@@ -1,7 +1,7 @@
 Savory Bread:55:Available
-Tereyaki Meatballs:80:Available
+Tereyaki Meatballs:110:Available
 Grilled Tomato Pizza:80:Available
 Sausage Been Dip:85:Available
 Cheese Ring:60:Available
 Cheese Fries:60:Available
-HUmmus Nachos:100:Available
+Hummus Nachos:100:Available

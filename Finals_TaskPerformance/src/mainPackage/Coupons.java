@@ -19,13 +19,12 @@ public class Coupons extends CouponUI
 	private String[] coupon;
 	private static double discount;
 	static String couponUse;
-	//Constructor for adding all coupons in string array
+	
 	public Coupons() throws FileNotFoundException
 	{
 		refreshCoupon();
 	}
 	
-	//Re-input all of the coupon data in the setter getter
 	public void refreshCoupon() throws FileNotFoundException
 	{
 		File file = new File(path);
@@ -33,16 +32,14 @@ public class Coupons extends CouponUI
 		String[] tempC = new String[1];
 		LinkedList<String> tempCoupon = new LinkedList<String>();
 		
-		//check each line of txt file
 		while (sc.hasNextLine()) 
 		{
-			//add each line to tempCoupon arrayList
 			tempCoupon.add(sc.nextLine());
 		}
 		
-		//Set the coupon
 		setCoupons(tempCoupon.toArray(new String[tempCoupon.size()]));
 	}
+	
 	public void removeCoupon(String coupon, boolean isUse) throws IOException
 	{
 		File file = new File(path);
@@ -97,7 +94,6 @@ public class Coupons extends CouponUI
 		{
 			line = scan.nextLine();
 			lineArr = line.split(":");
-			//if it exist dont savec
 			if(lineArr[0].equals(coupon))
 			{
 				isWrite = false;
@@ -166,7 +162,6 @@ public class Coupons extends CouponUI
 		return coupon;
 	}
 	
-	//Setting the coupon that the user used
 	public void setCoupon_use(String couponUse)
 	{
 		this.couponUse = couponUse;

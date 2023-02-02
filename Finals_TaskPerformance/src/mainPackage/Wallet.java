@@ -35,8 +35,6 @@ public class Wallet extends WalletUI
 			}
 		}
 		
-		//Add the user to the wallet txt file
-		//if the user wallet does not exist
 		if(isExist == false)
 		{
 			FileWriter writer = new FileWriter(walletPath, true);

@@ -24,7 +24,6 @@ public class CostumerUI
 		Cart cart = new Cart();
 		shopClass.printMenu();
 		Coupons coupon = new Coupons();
-		HtmlClass html = new HtmlClass();
 		String choiceDish, choiceQuantity, user;
 		
 		do
@@ -36,7 +35,6 @@ public class CostumerUI
 			choiceDish = scan.nextLine();
 			BorderBox.lineDown();
 			
-			//Stop the program if the user entered exit
 			if(choiceDish.equalsIgnoreCase("exit"))
 			{
 				break;
@@ -47,7 +45,7 @@ public class CostumerUI
 					|| shopClass.special.stream().anyMatch(choiceDish::equalsIgnoreCase)
 					|| shopClass.dessert.stream().anyMatch(choiceDish::equalsIgnoreCase))
 			{
-				
+				//etoooooooooooooooooooooo
 				do
 				{
 					BorderBox.lineUp();
@@ -63,22 +61,18 @@ public class CostumerUI
 					
 					BorderBox.printLine("Please enter number only");
 				} while(true);
+				//etoooooooooooooooooooooooooooooooooooooooooooo
 				
-				//Adding the user choices to cart
 				cart.addCart(choiceDish, choiceQuantity);
 				
-				//Go back if user want to order again
 				if(orderAgain(scan) == true)
 				{
 					continue;
 				}
 				else
 				{
-					//asking user to input coupon
 					coupon.enterCoupon();
 					
-					
-					//Asking for address
 					BorderBox.lineUp();
 					BorderBox.printLine("Please enter your address");
 					BorderBox.printInput();
@@ -86,7 +80,6 @@ public class CostumerUI
 					cData.setAddress(scan.nextLine());
 					BorderBox.lineDown();
 					
-					//View the cart
 					cart.viewCart();
 					do
 					{
@@ -155,10 +148,8 @@ public class CostumerUI
 		Scanner scan = new Scanner(System.in);
 		String choices;
 		boolean isLogout = false;
-		//Looping for costumer menu
 		do
 		{
-			//Looping for option validation
 			do
 			{
 				BorderBox.lineUp();
@@ -175,7 +166,6 @@ public class CostumerUI
 					break;
 				}
 				
-				//Print if the user input is invalid
 				BorderBox.printLine("Please enter the correct option");
 			} while(true);
 			
@@ -232,13 +222,11 @@ public class CostumerUI
 		BorderBox.lineUp();
 		BorderBox.printLine("You entered costumer");
 		
-		//Looping for menu 
 		do
 		{
 			BorderBox.printLine("Please choose");
 			BorderBox.printLine("[LOGIN]  [REGISTER]  [GO BACK]");
 			BorderBox.lineDown();
-			//looping for option validation
 			do
 			{
 				BorderBox.lineUp();
@@ -247,27 +235,22 @@ public class CostumerUI
 				choice = scan.nextLine();
 				BorderBox.lineDown();
 				
-				//Stop the loop if the user input is valid
 				if(Pattern.matches("login|register|go back", choice.toLowerCase()))
 				{
 					break;
 				}
 				
-				//Print if the user input is invalid
 				BorderBox.printLine("Please enter the correct option");
 			} while(true);
 			
 			switch (choice.toLowerCase()) 
 			{
-			//login
 			case "login":
 				login(costumer);
 				break;
-			//Register
 			case "register":
 				register(costumer);
 				break;
-			//Go back
 			case "go back":
 				isContinue = false;
 				break;
@@ -279,9 +262,7 @@ public class CostumerUI
 	{
 		String username, password, confirmPassword, birthday, contactNum;
 		
-		//Looping for registration
 		do {				
-			//Looping for username validation
 			do
 			{
 				BorderBox.lineUp();
@@ -290,13 +271,6 @@ public class CostumerUI
 				BorderBox.printInput();
 				username = scan.nextLine();
 				BorderBox.lineDown();
-				
-				/*
-				 * This regular expression will match a string that
-				 *  starts and ends with alphanumeric characters
-				 *   (including letters, numbers, periods, underscores, 
-				 *   and dashes), and is between 3 and 15 characters long.
-				 */
 				if(Pattern.matches("^[a-zA-Z0-9._-]{3,15}$", username))
 				{
 					break;
@@ -305,7 +279,6 @@ public class CostumerUI
 				BorderBox.printLine("Invalid username, Please try again");
 			} while(true);
 			
-			//Looping for password vaildation
 			do 
 			{
 				BorderBox.lineUp();
@@ -326,7 +299,6 @@ public class CostumerUI
 					BorderBox.printLine("Incorrect");
 					continue;
 				}
-				//Check if password does not have space
 				if(!password.isEmpty())
 				{
 					break;
@@ -334,8 +306,7 @@ public class CostumerUI
 				
 				BorderBox.printLine("Invalid password, Pleae try again");
 			} while (true);
-			
-			//Looping for birthday validation
+		
 			do
 			{
 				BorderBox.lineUp();
@@ -343,7 +314,6 @@ public class CostumerUI
 				BorderBox.printInput();
 				birthday = scan.nextLine();
 				BorderBox.lineDown();
-					//Check if its YYYY-MM-DD format
 					if(Pattern.matches("^([1-2][0-9][0-9][0-9])-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$",
 							birthday))
 					{
@@ -353,7 +323,6 @@ public class CostumerUI
 				BorderBox.printLine("Format: YYYY-MM-DD");
 			} while(true);
 			
-			//Looping for phone number validation
 			do 
 			{
 				BorderBox.lineUp();
@@ -362,7 +331,6 @@ public class CostumerUI
 				contactNum = scan.nextLine();
 				BorderBox.lineDown();
 				
-				//Check if the number is integer and 11 characters
 				if(Pattern.matches("[0-9]{11}", contactNum))
 				{
 					break;

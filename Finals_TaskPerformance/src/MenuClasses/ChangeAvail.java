@@ -39,8 +39,7 @@ public class ChangeAvail
 				choice = scan.nextLine();
 				BorderBox.lineDown();
 				
-				//Checks the user input
-				if(choice.matches("main dish|drinks|dessert|special menu|go back"))
+				if(choice.toLowerCase().matches("main dish|drinks|dessert|special menu|go back"))
 				{
 					break;
 				}
@@ -101,14 +100,14 @@ public class ChangeAvail
 			do {
 				BorderBox.lineUp();
 				BorderBox.printLine("Please choose");
-				BorderBox.printLine("[AVAILABLE]  :  [NOT AVAILABLE]");
+				BorderBox.printLine("[AVAILABLE]  :  [UNAVAILABLE]");
 				BorderBox.printLine("Enter: ");
 				BorderBox.printInput();
 				avail = scan.nextLine();
 				BorderBox.lineDown();
 				
 				
-				if(avail.toLowerCase().matches("available|not available")) 
+				if(avail.toLowerCase().matches("available|unavailable")) 
 				{
 					break;
 				}
@@ -211,7 +210,7 @@ public class ChangeAvail
 				}
 				else
 				{
-					txtTemp.append(temp[0] + ":" + temp[1] + ":Not Aavailable");
+					txtTemp.append(temp[0] + ":" + temp[1] + ":Unavailable");
 				}
 				isChanged = true;
 			}
@@ -227,7 +226,6 @@ public class ChangeAvail
 			write(txtTemp, path);
 		} catch (IOException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return isChanged;

@@ -17,7 +17,6 @@ public class CouponUI
 		
 		do
 		{
-			//Looping for option validation
 			do
 			{
 				BorderBox.lineUp();
@@ -28,7 +27,6 @@ public class CouponUI
 				choice = sc.nextLine();
 				BorderBox.lineDown();
 				
-				//Stop the loop if the user input is correct
 				if(choice.toLowerCase().matches("add coupon|remove coupon|go back"))
 				{
 					break;
@@ -51,7 +49,6 @@ public class CouponUI
 				break;
 			}
 			
-			//Re-enter all coupon on the ArrayList in coupon class
 			coup.refreshCoupon();
 		} while(true);
 	}
@@ -70,10 +67,8 @@ public class CouponUI
 			couponTitle = sc.nextLine();
 			BorderBox.lineDown();
 			
-			//Checking if user input is empty
 			if(!couponTitle.isBlank())
 			{
-				//looping for discount validation
 				do 
 				{
 					BorderBox.printLine("Discount: ");
@@ -81,7 +76,6 @@ public class CouponUI
 					couponRate = sc.nextLine();
 					BorderBox.lineDown();
 					
-					//Stop the loop if the user input is correct
 					if(Pattern.matches("\\d+", couponRate))
 					{
 						break;
@@ -93,7 +87,6 @@ public class CouponUI
 			BorderBox.printLine("Invalid input");
 		} while(true);
 		
-		//calling add coupon method from coupon class
 		coup.addCoupon(couponTitle, couponRate);
 	}
 	
@@ -111,7 +104,6 @@ public class CouponUI
 			couponTitle = sc.nextLine();
 			BorderBox.lineDown();
 			
-			//Stop the loop if the user input is not empty
 			if(!couponTitle.isBlank())
 			{
 				break;
@@ -150,6 +142,7 @@ public class CouponUI
 				data = coupon.getCoupon()[i].split(":");
 				if(user.toLowerCase().matches("exit|go back"))
 				{
+					coupon.setCoupon_use("");
 					isAllowed = true;
 					break;
 				}

@@ -34,8 +34,7 @@ public class AddMenu
 				choice = scan.nextLine();
 				BorderBox.lineDown();
 				
-				//Checks the user input
-				if(choice.matches("main dish|drinks|dessert|special menu|go back"))
+				if(choice.toLowerCase().matches("main dish|drinks|dessert|special menu|go back"))
 				{
 					break;
 				}
@@ -214,7 +213,6 @@ public class AddMenu
 			//Check if dish already exist
 			if(data[0].equalsIgnoreCase(dish))
 			{
-				//Stop the code (return) pag may katulad
 				BorderBox.printLine("The dish " + dish + " you entered already exist");
 				return false;
 			} 

@@ -21,7 +21,6 @@ public class OrderRun {
 			BorderBox.printLine("Please choose");
 			BorderBox.printLine("[ADMIN]  :  [COSTUMER]  :  [EXIT]");
 			BorderBox.lineDown();
-			//looping for admin and costumer choices
 			do 
 			{
 				BorderBox.lineUp();
@@ -30,7 +29,6 @@ public class OrderRun {
 				userChoice = scan.nextLine();
 				BorderBox.lineDown();
 				
-				//if input is costumer or admin, hihinto na yung loop
 				if(userChoice.toLowerCase().matches("costumer|admin|exit"))
 				{
 					break;
@@ -39,21 +37,16 @@ public class OrderRun {
 				BorderBox.printLine("Please enter the correct option");
 			} while (true);
 			
-			//Continue the program pag tama na yung input ng user
-			//Switch case for admin and costumer
 			switch (userChoice.toLowerCase())
 			{
-				//if the user input is admin
 				case "admin":
 					Admin admin = new Admin();
 					admin.adminLogin();
 					break;
-				//if the user input is costumer
 				case "costumer":
 					Costumer costumer = new Costumer();
 					costumer.startMenu();
 					break;
-				//if the user input is exit
 				case "exit":
 					BorderBox.lineUp();
 					BorderBox.printLine("The system has stopped");

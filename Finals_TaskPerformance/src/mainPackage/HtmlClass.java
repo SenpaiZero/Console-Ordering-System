@@ -24,8 +24,6 @@ public class HtmlClass {
 		costumerData cData = new costumerData();
 		html.delete(0, html.length());
 		total = 0;
-		//Adding value to string builder with string
-		//bali string builder accepts all tags like /n and more
 		html.append("<html>\r\n"
 				+ "    <head>\r\n"
 				+ "        <style>\r\n"
@@ -145,7 +143,6 @@ public class HtmlClass {
 				+ "								<td class=\"Rate\"><h2>Sub Total</h2></td>\r\n");
 				
 				
-				//add new item on html for every new item that costumers added
 				for (int i = 0; i < cart.length; i++)
 				{
 										
@@ -171,7 +168,7 @@ public class HtmlClass {
 				+ "					</div><!--End Table-->\r\n"
 				+ "\r\n"
 				+ "					<div id=\"legalcopy\">\r\n"
-				+ "						<p class=\"legal\"><strong>Thank you for your order!</strong> <br> Your food will be delivered within 30 minutes. \r\n"
+				+ "						<p class=\"legal\"><strong>Thank you for your order!</strong> <br> Your food will be delivered anytime soon. \r\n"
 				+ "						</p>\r\n"
 				+ "					</div>\r\n"
 				+ "\r\n"
@@ -185,14 +182,11 @@ public class HtmlClass {
 				+ "    </body>\r\n"
 				+ "</html>");
 				
-				//total in console
 				cData.setTotal(Integer.valueOf((int) (total -((discount / 100) * total))));
-				//Writing and saving the string builder into html
 				FileWriter writer = new FileWriter(htmlPath);
 				writer.write(html.toString());
 				writer.flush();
 				
-				//Opening the html file in browser
 				if(isOpen == true)
 				{
 				File htmlFile = new File(htmlPath);
@@ -215,10 +209,8 @@ public class HtmlClass {
 		}
 	}
 	
-	//Getting the price of the item by looking at the cart
 	static int getPrice(String cart) 
 	{
-		//Getting the value of food price
 		for (int i = 0; i < Shop.main.size(); i++) 
 		{
 			if(cart.equalsIgnoreCase(Shop.main.get(i))) 
@@ -227,7 +219,6 @@ public class HtmlClass {
 			}
 		}
 		
-		//Getting the value of drinks price
 		for (int i = 0; i < Shop.drink.size(); i++) 
 		{
 			if(cart.equalsIgnoreCase(Shop.drink.get(i))) 
@@ -236,7 +227,6 @@ public class HtmlClass {
 			}
 		}
 
-		//Getting the value of special menu price
 		for (int i = 0; i < Shop.special.size(); i++) 
 		{
 			if(cart.equalsIgnoreCase(Shop.special.get(i))) 
@@ -245,7 +235,6 @@ public class HtmlClass {
 			}
 		}
 		
-		//Getting the value of dessert price
 		for (int i = 0; i < Shop.dessert.size(); i++) 
 		{
 			if(cart.equalsIgnoreCase(Shop.dessert.get(i))) 

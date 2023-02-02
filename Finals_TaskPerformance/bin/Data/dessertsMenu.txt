@@ -1,7 +1,7 @@
 Vanilla Ice Cream:55:Available
 Glazed Dounut:100:Available
-Chocolate Cake:150:Available
+Chocolate Cake:150:Unavailable
 Mango Cream:85:Available
 Ube Cheesecake:120:Available
 Apple Pie:85:Available
-Halo-Halo:50:Not Available
+Halo-Halo:50:Unavailable

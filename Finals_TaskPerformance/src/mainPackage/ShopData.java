@@ -1,4 +1,4 @@
-package mainPackage;
+ package mainPackage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 public class ShopData 
 {
-	//Made a global variable para di na need mag re-create ng same variable sa ibang method
-	//and to make sure na iisa lang value ng data kada function
 	public static List<String> main = new ArrayList<String>();
 	public static List<String> mainPrice = new ArrayList<String>();
 	public static List<String> mainAvail = new ArrayList<String>();
@@ -44,14 +42,11 @@ public class ShopData
 		File fileDrink = new File(drinkPath);
 		File fileDessert = new File(desertPath);
 		File fileSpecial = new File(specialPath);
-	    //nilipat lang ung mga file sa scanner para ma scan ung mga laman ng file
 		Scanner scMain = new Scanner(fileMain);
 		Scanner scDrink = new Scanner(fileDrink);
 		Scanner scDessert = new Scanner(fileDessert);
 		Scanner scSpecial = new Scanner(fileSpecial);
 		
-		//Get line from txt file
-		//stop if blank
 		while (scMain.hasNextLine()) 
 		{
 			String[] line = new String[2];
@@ -60,15 +55,8 @@ public class ShopData
 			mainPrice.add(line[1]);
 			mainAvail.add(line[2]);
 		}
-		//Get line from txt file
-		//stop if blank
 		while (scDrink.hasNextLine()) 
 		{
-			//each line sa txt file may menu:price
-			//seseparate into 2 index array
-			//tapos add sa list ung array
-			//index 1: menu
-			//index 2: price
 			String[] line = new String[2];
 			line = scDrink.nextLine().split(":");
 			drink.add(line[0]);

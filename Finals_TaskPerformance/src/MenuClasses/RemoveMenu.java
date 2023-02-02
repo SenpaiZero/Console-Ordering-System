@@ -36,8 +36,7 @@ public class RemoveMenu
 				choice = scan.nextLine();
 				BorderBox.lineDown();
 				
-				//Checks the user input
-				if(choice.matches("main dish|drinks|dessert|special menu|go back"))
+				if(choice.toLowerCase().matches("main dish|drinks|dessert|special menu|go back"))
 				{
 					break;
 				}
@@ -199,7 +198,6 @@ public class RemoveMenu
 			write(txtTemp, path);
 		} catch (IOException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return isRemove;

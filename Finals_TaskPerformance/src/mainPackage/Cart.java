@@ -29,9 +29,6 @@ public class Cart
 		{
 			isAdd = true;
 		}
-		else {
-			BorderBox.printLine("The " + dish + " is not on the menu");
-		}
 		
 		if(isAdd == true)
 		{
@@ -107,13 +104,23 @@ public class Cart
 		{
 		//Remove
 		case "remove":
-			BorderBox.lineUp();
-			BorderBox.printLine("Enter the ID of the item you want to remove");
-			BorderBox.printLine("Enter ID: ");
-			BorderBox.printInput();
-			id = scanner.nextLine();
-			BorderBox.lineDown();			
-			removeCart_edit(Integer.valueOf(id));
+			do
+			{
+				BorderBox.lineUp();
+				BorderBox.printLine("Enter the ID of the item you want to remove");
+				BorderBox.printLine("Enter ID: ");
+				BorderBox.printInput();
+				id = scanner.nextLine();
+				BorderBox.lineDown();	
+				if(Pattern.matches("\\d+", id))
+				{
+					if(cartDish.size() >= Integer.valueOf(id))
+					{
+						removeCart_edit(Integer.valueOf(id));
+						break;
+					}
+				}
+			} while(true);
 			break;
 		//Change
 		case "change quantity":

@@ -5,6 +5,6 @@ Sweet & Sour Salmon:200:Available
 Chili Garlic Beef:170:Available
 Sticky Tamarind Chicken:120:Available
 Pepper Butter Pork :160:Available
-Roasted Spicy Shrimp:180:Available
+Roasted Spicy Shrimp:180:Unavailable
 Sweet Fry Lamb:250:Available
-Steam butter Lobster:280:Availablebutter:6:Available
+Steam butter Lobster:280:Available
